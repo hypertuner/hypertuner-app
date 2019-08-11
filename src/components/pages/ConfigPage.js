@@ -6,10 +6,10 @@ import Add from '../buttons/Add';
 
 export default function ConfigPage() {
     return (
-        <div>
+        <>
             <NavBar />
             <ConfigGrid />
             <Add />
-        </div>
+        </>
     );
 }

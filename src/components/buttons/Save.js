@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
-import PlayIcon from '@material-ui/icons/PlayArrow';
+import SaveIcon from '@material-ui/icons/Save';
 
 const useStyles = makeStyles(theme => ({
   // toolbarButtons: {
@@ -17,10 +17,10 @@ export default function PlayButton() {
   }
 
   return (
-    <>
+    <div className={classes.toolbarButtons}>
         <IconButton color="inherit" onClick={handlePlay} aria-label="close">
-          <PlayIcon />
+          <SaveIcon />
         </IconButton>
-    </>
+    </div>
   );
 }
