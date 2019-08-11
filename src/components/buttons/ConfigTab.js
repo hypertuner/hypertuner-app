@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Play from '../buttons/Play';
@@ -26,8 +27,12 @@ export default function ConfigTab({job})  {
         <>
             <Paper className={classes.paper}>
                 <Grid container spacing={3}>
-                <Grid item alignItems="center" xs={9}> <Typography className={classes.title}>{job}</Typography> </Grid>
-                <Grid item alignItems="center" xs={3}> <Play className={classes.pbutton}/> </Grid>
+                    <Grid item alignItems="center" xs={9}> 
+                        <Button>
+                            <Typography className={classes.title}>{job}</Typography>
+                        </Button>  
+                    </Grid>
+                    <Grid item alignItems="center" xs={3}> <Play className={classes.pbutton}/> </Grid>
                 </Grid>
             </Paper>
         </>

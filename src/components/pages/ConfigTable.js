@@ -11,9 +11,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const typeLookupMap = { 0: 'float', 1: 'integer', 2: 'boolean' }
-
-export default function ConfigTable() {
+export default function ConfigTable({state, setState, typeLookupMap}) {
   const classes = useStyles();
   const title = <TextField
     id="standard-with-placeholder"
@@ -21,22 +19,26 @@ export default function ConfigTable() {
     className={classes.textField}
     margin="normal"
   />
-  const [state, setState] = React.useState({
-    columns: [
-      { title: 'Name', field: 'name' },
-      {
-        title: 'Type',
-        field: 'type',
-        lookup: typeLookupMap,
-      },
-      { title: 'Value', field: 'value' },
-    ],
-    data: [
-      { name: "val0", type: 0, value: 0.01 },
-      { name: "val1", type: 1, value: 10 },
-    ],
-  });
+  // const [col, setCol] = React.useState({
+  //   columns: [
+  //     { title: 'Name', field: 'name' },
+  //     {
+  //       title: 'Type',
+  //       field: 'type',
+  //       lookup: typeLookupMap,
+  //     },
+  //     { title: 'Value', field: 'value' },
+  //   ]
+  // });
 
+  // function convertType(data) {
+  //   Object.values(data).map(function(a) {
+  //     a.type = typeLookupMap[a.type]
+  //     console.log(a)
+  //   })
+  // }
+
+  // convertType(state.data)
   return (
     <MaterialTable
       title={title}

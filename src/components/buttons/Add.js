@@ -42,7 +42,20 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function AddButton() {
   const classes = useStyles();
+  const typeLookupMap = { 0: 'float', 1: 'integer', 2: 'boolean' };
   const [open, setOpen] = React.useState(false);
+  const [state, setState] = React.useState({
+    columns: [
+      { title: 'Name', field: 'name' },
+      {
+        title: 'Type',
+        field: 'type',
+        lookup: typeLookupMap,
+      },
+      { title: 'Value', field: 'value' },
+    ],
+    data: []
+  });
 
   function handleClick() {
     setOpen(true);
@@ -53,7 +66,7 @@ export default function AddButton() {
   }
 
   function handleSave() {
-      alert("Saving config file")
+    console.log(state.data);
   }
 
   return (
@@ -69,11 +82,11 @@ export default function AddButton() {
             </IconButton>
             <div className={classes.toolbarButtons}>
                 <Play />
-                <Save />
+                <Save handleSave={handleSave} state={state}/>
             </div>
           </Toolbar>
         </AppBar>
-        <ConfigTable />
+        <ConfigTable state={state} setState={setState} typeLookupMap={typeLookupMap}/>
       </Dialog>
     </>
   );
