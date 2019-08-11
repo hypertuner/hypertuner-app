@@ -2,8 +2,9 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Play from './Play';
+import Play from '../buttons/Play';
 import Typography from '@material-ui/core/Typography';
+import ConfigTab from '../buttons/ConfigTab';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,17 +39,11 @@ export default function FullWidthGrid() {
         {
           jobList.map(job =>
             <Grid item className={classes.grid}>
-              <Paper className={classes.paper}>
-                  <Grid container spacing={3}>
-                    <Grid item alignItems="center" xs={9}> <Typography className={classes.title}>{job}</Typography> </Grid>
-                    <Grid item alignItems="center" xs={3}> <Play className={classes.pbutton}/> </Grid>
-                  </Grid>
-              </Paper>
+              <ConfigTab job={job}/>
             </Grid>
           )
         }
       </Grid>
     </div>
-
   );
 }
