@@ -66,10 +66,10 @@ export default function AddButton() {
             </IconButton>
             <div className={classes.toolbarButtons}>
                 <IconButton color="inherit" onClick={handleSave} aria-label="close">
-                <PlayIcon />
+                  <PlayIcon />
                 </IconButton>
                 <IconButton color="inherit" onClick={handleSave} aria-label="close">
-                <SaveIcon />
+                  <SaveIcon />
                 </IconButton>
             </div>
           </Toolbar>

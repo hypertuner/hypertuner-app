@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import {Link} from 'react-router-dom';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -8,13 +9,17 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    height: "10%"
+  },
   button: {
-    margin: theme.spacing(2)
+    margin: theme.spacing(2),
+    textDecoration: "inherit",
+    color: "inherit"
   },
   menuButton: {
     marginRight: theme.spacing(2)
   },
-
   toolbarButtons: {
     // margin: theme.spacing(1.5),
     marginLeft: "auto",
@@ -41,8 +46,16 @@ export default function NavBar() {
             HyperTuner
           </Typography>
           <span className={classes.toolbarButtons}>
-            <Button className={classes.button} color="inherit">Configs</Button>
-            <Button className={classes.button} color="inherit">Graph</Button>
+            <Link className={classes.button} to='/' >
+              <Button className={classes.button}>
+                Configs
+              </Button>
+            </Link>
+            <Link className={classes.button} to='/graph'>
+              <Button className={classes.button}>
+                Graphs
+              </Button>
+            </Link>
           </span>
         </Toolbar>
       </AppBar>

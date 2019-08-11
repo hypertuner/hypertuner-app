@@ -1,17 +1,22 @@
 import React from 'react';
-import NavBar from './components/navigation/NavBar';
-import ConfigGrid from './components/buttons/ConfigGrid';
-import Add from './components/buttons/Add';
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
+} from 'react-router-dom';
+import ConfigPage from './components/pages/ConfigPage';
+import GraphPage from './components/pages/GraphPage';
 import './App.css';
 
 function App() {
   return (
-    
-    <div className="App">
-      <NavBar />
-      <ConfigGrid />
-      <Add />
-    </div>
+    <Router>
+        <Switch>
+          <Route exact path='/' component={ConfigPage} />
+          <Route path='/graph' component={GraphPage} />
+        </Switch>
+    </Router>
   );
 }
 
