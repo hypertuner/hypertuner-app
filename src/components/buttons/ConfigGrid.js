@@ -12,10 +12,11 @@ const useStyles = makeStyles(theme => ({
   paper: {
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    margin : "auto",
+    margin : 'auto',
   },
   title: {
     // textAlign: 'left',
+    // margin: 'auto'
   },
   pbutton: {
     textAlign: 'right'

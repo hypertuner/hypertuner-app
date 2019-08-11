@@ -7,7 +7,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import SaveIcon from '@material-ui/icons/Save';
+import Save from './Save';
 import Play from './Play';
 import Slide from '@material-ui/core/Slide';
 import ConfigTable from '../pages/ConfigTable';
@@ -29,7 +29,10 @@ const useStyles = makeStyles(theme => ({
     flex: 1,
   },
   toolbarButtons: {
-    marginLeft: 'auto',
+    marginLeft: "auto",
+    marginRight: -15,
+    display: "flex",
+    flexDirection: "row"
   },
 }));
 
@@ -54,7 +57,7 @@ export default function AddButton() {
   }
 
   return (
-    <div>
+    <>
       <Fab onClick={handleClick} color="primary" aria-label="add" className={classes.addPos}>
         <AddIcon />
       </Fab>
@@ -65,15 +68,13 @@ export default function AddButton() {
               <CloseIcon />
             </IconButton>
             <div className={classes.toolbarButtons}>
-                <IconButton color="inherit" onClick={handleSave} aria-label="close">
-                  <Play />
-                  <SaveIcon />
-                </IconButton>
+                <Play />
+                <Save />
             </div>
           </Toolbar>
         </AppBar>
         <ConfigTable />
       </Dialog>
-    </div>
+    </>
   );
 }

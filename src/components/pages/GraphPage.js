@@ -2,8 +2,8 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import NavBar from '../navigation/NavBar';
-import Checkbox from '../buttons/Checkbox'
-import ProcessGraph from './ProcessGraph';
+import Checkbox from '../objects/Checkbox'
+import ProcessGraph from '../objects/ProcessGraph';
 
 const useStyles = makeStyles(theme => ({
     graph: {
