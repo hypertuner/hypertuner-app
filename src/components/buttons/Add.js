@@ -8,7 +8,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
-import PlayIcon from '@material-ui/icons/PlayArrow';
+import Play from './Play';
 import Slide from '@material-ui/core/Slide';
 import ConfigTable from '../pages/ConfigTable';
 
@@ -66,9 +66,7 @@ export default function AddButton() {
             </IconButton>
             <div className={classes.toolbarButtons}>
                 <IconButton color="inherit" onClick={handleSave} aria-label="close">
-                  <PlayIcon />
-                </IconButton>
-                <IconButton color="inherit" onClick={handleSave} aria-label="close">
+                  <Play />
                   <SaveIcon />
                 </IconButton>
             </div>
