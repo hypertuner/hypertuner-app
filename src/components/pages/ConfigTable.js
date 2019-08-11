@@ -50,7 +50,7 @@ export default function ConfigTable() {
           if (columnDef.field === 'value') {
             columnDef.type = typeLookupMap[rowData.type]
           }
-          
+
           return (
             <MTableEditField {...props} {...{columnDef, rowData}} />
           )
