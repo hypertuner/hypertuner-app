@@ -9,16 +9,11 @@ const useStyles = makeStyles(theme => ({
   // },
 }));
 
-export default function PlayButton() {
+export default function SaveButton({handleSave, state}) {
   const classes = useStyles();
-
-  function handlePlay(){
-    alert("Running file")
-  }
-
   return (
     <div className={classes.toolbarButtons}>
-        <IconButton color="inherit" onClick={handlePlay} aria-label="close">
+        <IconButton color="inherit" onClick={handleSave} aria-label="close">
           <SaveIcon />
         </IconButton>
     </div>

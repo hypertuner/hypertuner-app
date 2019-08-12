@@ -1,9 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Play from '../buttons/Play';
-import Typography from '@material-ui/core/Typography';
 import ConfigTab from '../buttons/ConfigTab';
 
 const useStyles = makeStyles(theme => ({

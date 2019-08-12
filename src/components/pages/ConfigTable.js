@@ -1,48 +1,44 @@
 import React from 'react';
 import MaterialTable, { MTableEditField , MTableCell} from 'material-table';
-import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
+// import TextField from '@material-ui/core/TextField';
+// import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200,
-  }
-}));
+// const useStyles = makeStyles(theme => ({
+//   textField: {
+//     marginLeft: theme.spacing(1),
+//     marginRight: theme.spacing(1),
+//     width: 200,
+//   }
+// }));
 
-const typeLookupMap = { 0: 'float', 1: 'integer', 2: 'boolean' }
+export default function ConfigTable({state, setState, typeLookupMap, title}) {
+  // const classes = useStyles();
+  // const title = <TextField
+  //   id="standard-with-placeholder"
+  //   label="Add Config Title"
+  //   className={classes.textField}
+  //   margin="normal"
+  // />
+  // const [col, setCol] = React.useState({
+  //   columns: [
+  //     { title: 'Name', field: 'name' },
+  //     {
+  //       title: 'Type',
+  //       field: 'type',
+  //       lookup: typeLookupMap,
+  //     },
+  //     { title: 'Value', field: 'value' },
+  //   ]
+  // });
 
-export default function ConfigTable() {
-  const classes = useStyles();
-  const title = <TextField
-    id="standard-with-placeholder"
-    label="Add Config Title"
-    className={classes.textField}
-    margin="normal"
-  />
-  const [state, setState] = React.useState({
-    columns: [
-      { title: 'Name', field: 'name' },
-      {
-        title: 'Type',
-        field: 'type',
-        lookup: typeLookupMap,
-      },
-      { title: 'Value', field: 'value' },
-    ],
-    data: [
-      { name: "val0", type: 0, value: 0.01 },
-      { name: "val1", type: 1, value: 10 },
-    ],
-  });
+  // function convertType(data) {
+  //   Object.values(data).map(function(a) {
+  //     a.type = typeLookupMap[a.type]
+  //     console.log(a)
+  //   })
+  // }
 
-
-  function handleLoad() {
-      alert("Loading file!")
-      //load correct configuration file from local file system
-  }
-
+  // convertType(state.data)
   return (
     <MaterialTable
       title={title}
@@ -56,7 +52,6 @@ export default function ConfigTable() {
           if (columnDef.field === 'value') {
             columnDef.type = typeLookupMap[rowData.type]
           }
-
           return (
             <MTableEditField {...props} {...{columnDef, rowData}} />
           )
