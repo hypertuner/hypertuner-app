@@ -19,10 +19,7 @@ export const ProcessGraph = ({ graphData }) => {
   const classes = useStyles();
 
   return (
-    <FlexibleXYPlot xDomain={[0, 10]} style={{
-        maxWidth: '90%',
-        maxHeight: '90%'
-    }}>
+    <FlexibleXYPlot>
       <HorizontalGridLines style={{ stroke: "#B7E9ED" }} />
       <VerticalGridLines style={{ stroke: "#B7E9ED" }} />
       <XAxis

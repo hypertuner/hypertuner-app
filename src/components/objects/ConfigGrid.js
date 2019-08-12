@@ -20,9 +20,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'right'
   },
   grid: {
-    margin: theme.spacing(3),
-    marginBottom: theme.spacing(0),
-    marginTop: theme.spacing(3)
+    margin: theme.spacing(3)
   }
 }));
 
@@ -45,7 +43,7 @@ export default function FullWidthGrid({configList}) {
 
   return (
     <div className={classes.root}>
-      <Grid container direction="column" justify="center" spacing={3}>
+      <Grid container direction="column" justify="center" >
         {
           configList.map(config =>
             <Grid item className={classes.grid}>

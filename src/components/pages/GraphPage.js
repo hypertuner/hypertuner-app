@@ -9,7 +9,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 const useStyles = makeStyles(theme => ({
   graph: {
-    height: "90%"
+    height: "90%",
+    width: "90%"
   },
   gridCon: {
     height: "100%"
@@ -61,11 +62,9 @@ export default function GraphPage() {
       <NavBar />
       <Grid container className={classes.graph}>
         <Grid item xs={12} sm={9}>
-          <div className={classes.graphContainer}>
-            <ProcessGraph
-              graphData={graphData.filter(g => graphNameMap[g.name])}
-            />
-          </div>
+          <ProcessGraph
+            graphData={graphData.filter(g => graphNameMap[g.name])}
+          />
         </Grid>
         <Grid item xs={12} sm={3}>
           <CheckBoxGroup>
