@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ConfigTab from '../buttons/ConfigTab';
@@ -20,23 +20,34 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'right'
   },
   grid: {
-    margin: theme.spacing(3),
-    marginBottom: theme.spacing(0),
-    marginTop: theme.spacing(3)
+    margin: theme.spacing(3)
   }
 }));
 
-export default function FullWidthGrid() {
+export default function FullWidthGrid({configList}) {
   const classes = useStyles();
-  const jobList = ["jobnumber1", "jobnumber2", "jobnumber3"];
+  
+  // const [configList, setConfigList] = useState([])
+
+  // useEffect(()=>{
+  //   async function getConfigs() {
+  //     const configListResponse = await fetch(`${serverHost}/list-config`)
+  //     const configListData = await configListResponse.json();
+  //     console.log(configListData.configList);
+  //     setConfigList(configListData.configList);
+  //   }
+  //   getConfigs()
+  // }, [])
+
+  // console.log(configList);
 
   return (
     <div className={classes.root}>
-      <Grid container direction="column" justify="center" spacing={3}>
+      <Grid container direction="column" justify="center" >
         {
-          jobList.map(job =>
+          configList.map(config =>
             <Grid item className={classes.grid}>
-              <ConfigTab job={job}/>
+              <ConfigTab job={config}/>
             </Grid>
           )
         }

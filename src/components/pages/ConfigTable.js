@@ -1,24 +1,24 @@
 import React from 'react';
 import MaterialTable, { MTableEditField , MTableCell} from 'material-table';
-import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
+// import TextField from '@material-ui/core/TextField';
+// import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 200,
-  }
-}));
+// const useStyles = makeStyles(theme => ({
+//   textField: {
+//     marginLeft: theme.spacing(1),
+//     marginRight: theme.spacing(1),
+//     width: 200,
+//   }
+// }));
 
-export default function ConfigTable({state, setState, typeLookupMap}) {
-  const classes = useStyles();
-  const title = <TextField
-    id="standard-with-placeholder"
-    label="Add Config Title"
-    className={classes.textField}
-    margin="normal"
-  />
+export default function ConfigTable({state, setState, typeLookupMap, title}) {
+  // const classes = useStyles();
+  // const title = <TextField
+  //   id="standard-with-placeholder"
+  //   label="Add Config Title"
+  //   className={classes.textField}
+  //   margin="normal"
+  // />
   // const [col, setCol] = React.useState({
   //   columns: [
   //     { title: 'Name', field: 'name' },
@@ -52,7 +52,6 @@ export default function ConfigTable({state, setState, typeLookupMap}) {
           if (columnDef.field === 'value') {
             columnDef.type = typeLookupMap[rowData.type]
           }
-
           return (
             <MTableEditField {...props} {...{columnDef, rowData}} />
           )
