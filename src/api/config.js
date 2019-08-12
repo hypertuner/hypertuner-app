@@ -1,0 +1,1 @@
+export const serverHost = window.location.port === '3001' ? 'http://localhost:3000' : ''
