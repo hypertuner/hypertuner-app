@@ -33,7 +33,12 @@ export default class ReactTerminal extends React.Component {
       cursorBlink: true,
       rows: 3,
       fontSize: this.fontSize,
-      windowsMode: true
+      windowsMode: true,
+      theme: {
+        foreground: '#000',
+        background: '#FFF',
+        cursor: '#000',
+      }
     });
 
     this.term.open(document.querySelector(`#${ this.elementId }`));
