@@ -4,15 +4,15 @@ import PlayIcon from '@material-ui/icons/PlayArrow';
 
 export default function PlayButton() {
 
-  function handlePlay(){
+  function handlePlay() {
     alert("Running file")
   }
 
   return (
     <>
-        <IconButton color="inherit" onClick={handlePlay} aria-label="close">
-          <PlayIcon />
-        </IconButton>
+      <IconButton color="inherit" onClick={handlePlay} aria-label="close">
+        <PlayIcon />
+      </IconButton>
     </>
   );
 }

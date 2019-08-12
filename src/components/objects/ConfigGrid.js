@@ -26,22 +26,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function FullWidthGrid({configList}) {
+export default function FullWidthGrid({transition, configList, setConfigList}) {
   const classes = useStyles();
-  
-  // const [configList, setConfigList] = useState([])
-
-  // useEffect(()=>{
-  //   async function getConfigs() {
-  //     const configListResponse = await fetch(`${serverHost}/list-config`)
-  //     const configListData = await configListResponse.json();
-  //     console.log(configListData.configList);
-  //     setConfigList(configListData.configList);
-  //   }
-  //   getConfigs()
-  // }, [])
-
-  // console.log(configList);
 
   return (
     <div className={classes.root}>
@@ -49,7 +35,7 @@ export default function FullWidthGrid({configList}) {
         {
           configList.map(config =>
             <Grid item className={classes.grid}>
-              <ConfigTab job={config}/>
+              <ConfigTab job={config} transition={transition} configList={configList} setConfigList={setConfigList} />
             </Grid>
           )
         }
