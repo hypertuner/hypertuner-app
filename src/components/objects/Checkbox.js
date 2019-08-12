@@ -32,7 +32,8 @@ export default function CheckboxesGroup() {
   
     const { gilad, jason, antoine } = state;
     const error = [gilad, jason, antoine].filter(v => v).length !== 2;
-    
+  
+    //dynamically load in items from the config table
     return(
         <div className={classes.root}>
             <FormControl component="fieldset" className={classes.formControl}>

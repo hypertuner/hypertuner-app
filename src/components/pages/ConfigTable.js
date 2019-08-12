@@ -37,6 +37,12 @@ export default function ConfigTable() {
     ],
   });
 
+
+  function handleLoad() {
+      alert("Loading file!")
+      //load correct configuration file from local file system
+  }
+
   return (
     <MaterialTable
       title={title}
