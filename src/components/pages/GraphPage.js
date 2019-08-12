@@ -5,7 +5,6 @@ import NavBar from '../navigation/NavBar';
 import Checkbox from '../objects/Checkbox'
 import { ProcessGraph } from '../objects/ProcessGraph';
 
-
 const useStyles = makeStyles(theme => ({
     graph: {
         height: "90%"
@@ -34,29 +33,23 @@ export default function GraphPage() {
        ]
     )
 
+    //map function: you take something and for everything you do something
+    //filter function: check everything you need against it and filter out what you don't need 
+
     //TODO: populate when we pull from the saved configs 
-    const [graphNames, toggleOn] = React.useState([
+    const [graphNames, toggleOn] = React.useState(
         {
-            name: "name1",
-            toggleOn: false,
+            mrFig: false,
+            name2: false,
+            name3: true,
         },
-        {
-            name: "name2",
-            toggleOn: false,
-        },
-        {
-            name: "name3",
-            toggleOn: false,
-        },
-    ]);
+    );
 
     const onCheck = () => {
-        // setState({ ...state, [name]: event.target.checked }); //from CheckBox originally
-        //if the graphData is already in the structure above
-        //send it down to ProcessGraph to display it 
-        //else
-        //take the graph 
+      //access graphNames and flip boolean
+
     }
+
     return (
         <>
             <NavBar />

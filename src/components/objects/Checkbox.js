@@ -18,35 +18,32 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function CheckboxesGroup(onCheck, graphNames) {
-    const classes = useStyles();
-  
-    // const handleChange = name => event => {
-    //   setState({ ...state, [name]: event.target.checked });
-      
-    // };
-  
-  const { gilad, jason, antoine } = graphNames;
+export default function CheckboxesGroup({onCheck, graphNames}) {
+  const classes = useStyles();
+
+  const toggles = Object.entries(graphNames).map(([name, toggleOn]) => 
+                    <FormControlLabel
+                    control={<Checkbox checked={name} onChange={onCheck} value={toggleOn} />}
+                    label={name}
+                />
+                )
         
     return(
         <div className={classes.root}>
             <FormControl component="fieldset" className={classes.formControl}>
                 <FormLabel component="legend">Model Configurations</FormLabel>
                 <FormGroup>
-                <FormControlLabel
-                    control={<Checkbox checked={gilad} onChange={onCheck} value="gilad" />}
+                  {toggles}
+                {/* <FormControlLabel
+                    control={<Checkbox checked={gilad} onChange={handleChange} value="gilad" />}
                     label="Gilad Gray"
-                />
-                <FormControlLabel
-                    control={<Checkbox checked={jason} onChange={onCheck} value="jason" />}
-                    label="Jason Killian"
                 />
                 <FormControlLabel
                     control={
                     <Checkbox checked={antoine} onChange={onCheck} value="antoine" />
                     }
                     label="Antoine Llorca"
-                />
+                /> */}
                 </FormGroup>
                 <FormHelperText>Choose configurations to display</FormHelperText>
             </FormControl>
