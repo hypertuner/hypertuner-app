@@ -13,6 +13,11 @@ const useStyles = makeStyles(theme => ({
   },
   gridCon: {
     height: "100%"
+  },
+  graphContainer: {
+    padding: "5%",
+    width: "90%",
+    height: "90%"
   }
 }));
 
@@ -56,7 +61,11 @@ export default function GraphPage() {
       <NavBar />
       <Grid container className={classes.graph}>
         <Grid item xs={12} sm={9}>
-          <ProcessGraph graphData={graphData.filter(g => graphNameMap[g.name])} />
+          <div className={classes.graphContainer}>
+            <ProcessGraph
+              graphData={graphData.filter(g => graphNameMap[g.name])}
+            />
+          </div>
         </Grid>
         <Grid item xs={12} sm={3}>
           <CheckBoxGroup>
