@@ -18,19 +18,15 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function CheckboxesGroup() {
+export default function CheckboxesGroup(onCheck, graphNames) {
     const classes = useStyles();
-    const [state, setState] = React.useState({
-      gilad: true,
-      jason: false,
-      antoine: false,
-    });
   
-    const handleChange = name => event => {
-      setState({ ...state, [name]: event.target.checked });
-    };
+    // const handleChange = name => event => {
+    //   setState({ ...state, [name]: event.target.checked });
+      
+    // };
   
-    const { gilad, jason, antoine } = state;
+  const { gilad, jason, antoine } = graphNames;
         
     return(
         <div className={classes.root}>
@@ -38,16 +34,16 @@ export default function CheckboxesGroup() {
                 <FormLabel component="legend">Model Configurations</FormLabel>
                 <FormGroup>
                 <FormControlLabel
-                    control={<Checkbox checked={gilad} onChange={handleChange('gilad')} value="gilad" />}
+                    control={<Checkbox checked={gilad} onChange={onCheck} value="gilad" />}
                     label="Gilad Gray"
                 />
                 <FormControlLabel
-                    control={<Checkbox checked={jason} onChange={handleChange('jason')} value="jason" />}
+                    control={<Checkbox checked={jason} onChange={onCheck} value="jason" />}
                     label="Jason Killian"
                 />
                 <FormControlLabel
                     control={
-                    <Checkbox checked={antoine} onChange={handleChange('antoine')} value="antoine" />
+                    <Checkbox checked={antoine} onChange={onCheck} value="antoine" />
                     }
                     label="Antoine Llorca"
                 />
