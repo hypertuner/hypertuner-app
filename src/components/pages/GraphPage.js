@@ -30,14 +30,14 @@ export default function GraphPage() {
             name: 'graph3',
             data: [{ x: 1, y: 7 }, { x: 2, y: 11 }, { x: 3, y: 9 }, { x: 4, y: 2 }]
         }
-       ]
+    ]
     )
 
     //map function: you take something and for everything you do something
     //filter function: check everything you need against it and filter out what you don't need 
 
     //TODO: populate when we pull from the saved configs 
-    const [graphNames, toggleOn] = React.useState(
+    const [graphNameMap, setGraphNameMap] = useState(
         {
             mrFig: false,
             name2: false,
@@ -45,9 +45,19 @@ export default function GraphPage() {
         },
     );
 
-    const onCheck = () => {
-      //access graphNames and flip boolean
+    const onCheck = (name) => {
+        //access graphNames and flip boolean 
+        // graphNames[name] = !graphNames[name];
 
+        setGraphNameMap((currentGraphNameMap) => {
+            currentGraphNameMap[name] = !currentGraphNameMap[name]
+
+            console.log(currentGraphNameMap);
+
+            return currentGraphNameMap
+        })
+
+        // alert(graphNameMap[name])
     }
 
     return (
@@ -58,7 +68,7 @@ export default function GraphPage() {
                     <ProcessGraph graphData={graphData} />
                 </Grid>
                 <Grid item xs={12} sm={3}>
-                    <Checkbox onClick={onCheck} graphNames={graphNames} /> 
+                    <Checkbox onCheck={onCheck} graphNameMap={graphNameMap} />
                     {/* pass the checkstate stuff in here */}
                 </Grid>
             </Grid>
