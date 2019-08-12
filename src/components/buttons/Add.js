@@ -50,7 +50,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AddButton() {
+export default function AddButton({configList, setConfigList}) {
   const classes = useStyles();
   const typeLookupMap = { 0: 'float', 1: 'integer', 2: 'boolean', 3: "string" };
 
@@ -109,11 +109,6 @@ export default function AddButton() {
     saveData.name = state.name;
     console.log(saveData);
 
-    const configListResponse = await fetch(`${serverHost}/list-config`)
-    let configList = await configListResponse.json();
-    configList = configList.configList;
-    console.log(configList);
-
     if (configList.includes(state.name)) {
       alert("This configuration name already exists. Please rename it.")
     } else if (state.name === "") {
@@ -132,6 +127,16 @@ export default function AddButton() {
 
       console.log(result)
     }
+
+    // const configListResponse = await fetch(`${serverHost}/list-config`)
+    // let configList = await configListResponse.json();
+    // configList = configList.configList;
+    // console.log(configList);
+
+    const configListResponse = await fetch(`${serverHost}/list-config`)
+    const configListData = await configListResponse.json();
+    setConfigList(configListData.configList);
+    handleClose();
   }
 
   return (
