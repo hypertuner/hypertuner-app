@@ -1,20 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ConfigTab from '../buttons/ConfigTab';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   paper: {
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    margin : 'auto',
-  },
-  title: {
-    // textAlign: 'left',
-    // margin: 'auto'
+    margin : 'auto'
   },
   pbutton: {
     textAlign: 'right'
@@ -24,22 +20,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function FullWidthGrid({configList}) {
+export default function FullWidthGrid({transition, configList, setConfigList}) {
   const classes = useStyles();
-  
-  // const [configList, setConfigList] = useState([])
-
-  // useEffect(()=>{
-  //   async function getConfigs() {
-  //     const configListResponse = await fetch(`${serverHost}/list-config`)
-  //     const configListData = await configListResponse.json();
-  //     console.log(configListData.configList);
-  //     setConfigList(configListData.configList);
-  //   }
-  //   getConfigs()
-  // }, [])
-
-  // console.log(configList);
 
   return (
     <div className={classes.root}>
@@ -47,7 +29,7 @@ export default function FullWidthGrid({configList}) {
         {
           configList.map(config =>
             <Grid item className={classes.grid}>
-              <ConfigTab job={config}/>
+              <ConfigTab job={config} transition={transition} configList={configList} setConfigList={setConfigList} />
             </Grid>
           )
         }
