@@ -5,12 +5,12 @@ import ConfigTab from '../buttons/ConfigTab';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   paper: {
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    margin : 'auto',
+    margin : 'auto'
   },
   title: {
     // textAlign: 'left',
@@ -21,8 +21,8 @@ const useStyles = makeStyles(theme => ({
   },
   grid: {
     margin: theme.spacing(3),
-    marginBottom: theme.spacing(0),
-    marginTop: theme.spacing(3)
+    // marginBottom: theme.spacing(2),
+    // marginTop: theme.spacing(3)
   }
 }));
 
