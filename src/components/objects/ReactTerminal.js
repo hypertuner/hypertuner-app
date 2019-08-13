@@ -86,8 +86,6 @@ export default class ReactTerminal extends React.Component {
       if (e.keyCode === 87 && e.shiftKey && e.ctrlKey && e.altKey) {
         this.props.options.close && this.props.options.close();
       }
-
-      this.term.write(e.key);
     };
   }
   componentWillUnmount() {
