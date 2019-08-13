@@ -3,6 +3,12 @@ import NavBar from '../navigation/NavBar';
 import ConfigGrid from '../objects/ConfigGrid';
 import Add from '../buttons/Add';
 import { getConfigList } from '../../api/rest';
+import { serverHost } from '../../api/config';
+import Slide from '@material-ui/core/Slide';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default function ConfigPage() {
     const [configList, setConfigList] = useState([])
@@ -20,8 +26,8 @@ export default function ConfigPage() {
     return (
         <>
             <NavBar />
-            <ConfigGrid configList={configList}/>
-            <Add configList={configList} setConfigList={setConfigList}/>
+            <ConfigGrid transition={Transition} configList={configList} setConfigList={setConfigList}/>
+            <Add transition={Transition} configList={configList} setConfigList={setConfigList}/>
         </>
     );
 }

@@ -10,11 +10,7 @@ const useStyles = makeStyles(theme => ({
   paper: {
     textAlign: "center",
     color: theme.palette.text.secondary,
-    margin: "auto"
-  },
-  title: {
-    // textAlign: 'left',
-    // margin: 'auto'
+    margin : 'auto'
   },
   pbutton: {
     textAlign: "right"
@@ -24,31 +20,20 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function FullWidthGrid({ configList }) {
+
+export default function FullWidthGrid({transition, configList, setConfigList}) {
   const classes = useStyles();
-
-  // const [configList, setConfigList] = useState([])
-
-  // useEffect(()=>{
-  //   async function getConfigs() {
-  //     const configListResponse = await fetch(`${serverHost}/list-config`)
-  //     const configListData = await configListResponse.json();
-  //     console.log(configListData.configList);
-  //     setConfigList(configListData.configList);
-  //   }
-  //   getConfigs()
-  // }, [])
-
-  // console.log(configList);
 
   return (
     <div className={classes.root}>
-      <Grid container direction="column" justify="center">
-        {configList.map(config => (
-          <Grid key={config} item className={classes.grid}>
-            <ConfigTab job={config} />
-          </Grid>
-        ))}
+      <Grid container direction="column" justify="center" >
+        {
+          configList.map(config =>
+            <Grid item className={classes.grid}>
+              <ConfigTab job={config} transition={transition} configList={configList} setConfigList={setConfigList} />
+            </Grid>
+          )
+        }
       </Grid>
     </div>
   );

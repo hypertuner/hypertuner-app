@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,6 +15,7 @@ import ConfigTable from '../pages/ConfigTable';
 import TextField from '@material-ui/core/TextField';
 import { serverHost } from '../../api/config';
 import { createConfig } from '../../api/rest';
+import AddConfig from '../pages/AddConfig';
 
 
 const useStyles = makeStyles(theme => ({
@@ -24,77 +26,17 @@ const useStyles = makeStyles(theme => ({
     bottom: 20,
     left: 'auto',
     position: 'fixed'
-  },
-  appBar: {
-    position: 'relative',
-  },
-  title: {
-    marginLeft: theme.spacing(2),
-    flex: 1,
-  },
-  toolbarButtons: {
-    marginLeft: "auto",
-    marginRight: -15,
-    display: "flex",
-    flexDirection: "row"
-  },
-  textField: {
-    // marginLeft: theme.spacing(1),
-    // marginRight: theme.spacing(1),
-    // margin: theme.spacing(0.5),
-    marginBottom: "17px",
-    width: 200
   }
 }));
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
+// const Transition = React.forwardRef(function Transition(props, ref) {
+//     return <Slide direction="up" ref={ref} {...props} />;
+// });
 
-export default function AddButton({configList, setConfigList}) {
+export default function AddButton({transition, configList, setConfigList}) {
   const classes = useStyles();
-  const typeLookupMap = { 0: 'float', 1: 'integer', 2: 'boolean', 3: "string" };
 
   const [open, setOpen] = React.useState(false);
-  const [state, setState] = React.useState({
-    columns: [
-      { title: 'Name', field: 'name' },
-      {
-        title: 'Type',
-        field: 'type',
-        lookup: typeLookupMap,
-      },
-      { title: 'Value', field: 'value' },
-    ],
-    data: [
-      {name: "ajfklasj", type: "0", value: "10.01"},
-      {name: "jalkdfj", type: "1", value: "20"}
-    ],
-    name: ""
-  });
-
-  const title = <TextField
-    id="standard-with-placeholder"
-    label="Add Config Title"
-    className={classes.textField}
-    onChange={changeConfigName}
-  />
-
-  function changeConfigName(e) {
-    state.name = e.target.value;
-  }
-
-  function convertTable(data) {
-    let jsonData = {}
-    Object.values(data).forEach(function(hyp) {
-      if (typeof(hyp["value"]) === "string") {
-        jsonData[hyp["name"]] = parseFloat(hyp["value"]);
-      } else {
-        jsonData[hyp["name"]] = hyp["value"];
-      }
-    })
-    return jsonData;
-  }
 
   function handleClick() {
     setOpen(true);
@@ -130,26 +72,13 @@ export default function AddButton({configList, setConfigList}) {
     setConfigList(configListData.configList);
     handleClose();
   }
-
+  
   return (
     <>
       <Fab onClick={handleClick} color="primary" aria-label="add" className={classes.addPos}>
         <AddIcon />
       </Fab>
-      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-        <AppBar className={classes.appBar}>
-          <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
-              <CloseIcon />
-            </IconButton>
-            <div className={classes.toolbarButtons}>
-                <Play />
-                <Save handleSave={handleSave} state={state}/>
-            </div>
-          </Toolbar>
-        </AppBar>
-        <ConfigTable state={state} setState={setState} typeLookupMap={typeLookupMap} title={title}/>
-      </Dialog>
+      <AddConfig transition={transition} configList={configList} setConfigList={setConfigList}  open={open} setOpen={setOpen} name={""} data={{}}/>
     </>
   );
 }
