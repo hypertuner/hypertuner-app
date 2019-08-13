@@ -40,7 +40,7 @@ export const ProcessGraph = ({ graphData }) => {
           }}
         /> */}
 
-      {graphData.map(({ name, data }) => (
+      {graphData.map(([name, data]) => (
         <LineSeries
           key={name}
           data={data}

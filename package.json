@@ -9,6 +9,7 @@
     "material-table": "^1.48.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-epic-spinners": "^0.3.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.0",
     "react-vis": "^1.11.7",
