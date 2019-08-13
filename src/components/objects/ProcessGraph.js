@@ -1,27 +1,21 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-    XYPlot,
-    XAxis,
-    YAxis,
-    HorizontalGridLines,
-    VerticalGridLines,
-    LineSeries,
-    makeVisFlexible
-} from 'react-vis';
+  XYPlot,
+  XAxis,
+  YAxis,
+  HorizontalGridLines,
+  VerticalGridLines,
+  LineSeries,
+  makeVisFlexible
+} from "react-vis";
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        padding: "5%",
-        width: "90%",
-        height: "90%"
-    }
-}));
+const useStyles = makeStyles(theme => ({}));
 
-const FlexibleXYPlot = makeVisFlexible(XYPlot)
+const FlexibleXYPlot = makeVisFlexible(XYPlot);
 
 export const ProcessGraph = ({ graphData }) => {
-    const classes = useStyles();
+  const classes = useStyles();
 
     return (
         <div className={classes.root}>

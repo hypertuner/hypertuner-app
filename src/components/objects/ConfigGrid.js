@@ -25,7 +25,7 @@ export default function FullWidthGrid({transition, configList, setConfigList}) {
 
   return (
     <div className={classes.root}>
-      <Grid container direction="column" justify="center" spacing={3}>
+      <Grid container direction="column" justify="center" >
         {
           configList.map(config =>
             <Grid item className={classes.grid}>

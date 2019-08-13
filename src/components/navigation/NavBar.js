@@ -56,6 +56,11 @@ export default function NavBar() {
                 Graphs
               </Button>
             </Link>
+            <Link className={classes.button} to='/terminal'>
+              <Button className={classes.button}>
+                Terminal
+              </Button>
+            </Link>
           </span>
         </Toolbar>
       </AppBar>

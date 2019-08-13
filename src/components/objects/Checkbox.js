@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
     borderLeft: "1px solid gray",
-    height: "100%"
+    height: "95%"
   },
   formControl: {
     margin: theme.spacing(3)
