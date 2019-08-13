@@ -22,9 +22,6 @@ export default function PlayButton({name}) {
     } else {
       alert("Process failed");
     }
-    // const configListResponse = await fetch(`${serverHost}/list-config`)
-    // const configListData = await configListResponse.json();
-    // setConfigList(configListData.configList);
   }
 
   return (

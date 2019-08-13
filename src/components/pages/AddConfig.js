@@ -26,9 +26,6 @@ const useStyles = makeStyles(theme => ({
         flexDirection: "row"
     },
     textField: {
-        // marginLeft: theme.spacing(1),
-        // marginRight: theme.spacing(1),
-        // margin: theme.spacing(0.5),
         marginBottom: "17px",
         width: 200
     }
@@ -68,8 +65,6 @@ export default function AddConfig({ transition, configList, setConfigList, open,
         delete data['name'];
         Object.keys(data).map(function (keyName, keyIndex) {
             let row = {}
-            // use keyName to get current key's name
-            // and a[keyName] to get its value
             row["name"] = keyName;
             row["value"] = data[keyName];
             row["type"] = getKeyByValue(typeLookupMap, typeof (data[keyName]));

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
@@ -13,10 +13,6 @@ const useStyles = makeStyles(theme => ({
     paper: {
       textAlign: 'center',
       color: theme.palette.text.secondary
-    },
-    title: {
-      // textAlign: 'left',
-      // margin: 'auto'
     },
     pbutton: {
       textAlign: 'right'
