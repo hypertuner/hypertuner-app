@@ -4,20 +4,20 @@ import ConfigPage from "./components/pages/ConfigPage";
 import GraphPage from "./components/pages/GraphPage";
 import TerminalPage from "./components/pages/TerminalPage";
 
-import { HollowDotsSpinner as Loader } from "react-epic-spinners";
-
 import "./App.css";
 
-import { graphApi } from "./api/actionSocket";
+import { graphApi, terminalSocket } from "./api/actionSocket";
 
-const isSocketReady = () => graphApi.readyState === graphApi.OPEN;
+const isSocketReady = () =>
+  graphApi.readyState === graphApi.OPEN &&
+  terminalSocket.readyState === terminalSocket.OPEN;
 
 function App() {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     setIsReady(isSocketReady());
-  }, [graphApi.readyState]);
+  }, []);
 
   return isReady ? (
     <Router>
@@ -37,7 +37,7 @@ function App() {
         alignItems: "center"
       }}
     >
-      <Loader color="black" />
+      Loading . . .
     </div>
   );
 }

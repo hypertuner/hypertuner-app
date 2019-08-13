@@ -1,32 +1,32 @@
-import React, {useState, useEffect} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import ConfigTab from '../buttons/ConfigTab';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import ConfigTab from "../buttons/ConfigTab";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   paper: {
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.text.secondary,
-    margin : 'auto',
+    margin: "auto"
   },
   title: {
     // textAlign: 'left',
     // margin: 'auto'
   },
   pbutton: {
-    textAlign: 'right'
+    textAlign: "right"
   },
   grid: {
     margin: theme.spacing(3)
   }
 }));
 
-export default function FullWidthGrid({configList}) {
+export default function FullWidthGrid({ configList }) {
   const classes = useStyles();
-  
+
   // const [configList, setConfigList] = useState([])
 
   // useEffect(()=>{
@@ -43,14 +43,12 @@ export default function FullWidthGrid({configList}) {
 
   return (
     <div className={classes.root}>
-      <Grid container direction="column" justify="center" >
-        {
-          configList.map(config =>
-            <Grid item className={classes.grid}>
-              <ConfigTab job={config}/>
-            </Grid>
-          )
-        }
+      <Grid container direction="column" justify="center">
+        {configList.map(config => (
+          <Grid key={config} item className={classes.grid}>
+            <ConfigTab job={config} />
+          </Grid>
+        ))}
       </Grid>
     </div>
   );

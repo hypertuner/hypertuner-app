@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({}));
 
 const FlexibleXYPlot = makeVisFlexible(XYPlot);
 
-export const ProcessGraph = ({ graphData }) => {
+export const ProcessGraph = ({ graphList }) => {
   const classes = useStyles();
 
   return (
@@ -40,10 +40,10 @@ export const ProcessGraph = ({ graphData }) => {
           }}
         /> */}
 
-      {graphData.map(([name, data]) => (
+      {graphList.map(({graphName, graphData}) => (
         <LineSeries
-          key={name}
-          data={data}
+          key={graphName}
+          data={graphData}
           style={{
             strokeLinejoin: "round",
             strokeWidth: 4

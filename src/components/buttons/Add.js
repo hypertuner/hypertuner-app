@@ -13,6 +13,7 @@ import Slide from '@material-ui/core/Slide';
 import ConfigTable from '../pages/ConfigTable';
 import TextField from '@material-ui/core/TextField';
 import { serverHost } from '../../api/config';
+import { createConfig } from '../../api/rest';
 
 
 const useStyles = makeStyles(theme => ({
@@ -114,16 +115,7 @@ export default function AddButton({configList, setConfigList}) {
     } else if (state.name === "") {
       alert("Configuration file name is empty. Please name your configuration file.")
     } else {
-      const resultResponse = await fetch(`${serverHost}/create-config`, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(saveData)
-      });
-
-      const result = resultResponse.json()
+      const result = createConfig(saveData)
 
       console.log(result)
     }

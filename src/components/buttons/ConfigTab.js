@@ -26,13 +26,13 @@ export default function ConfigTab({job})  {
     return (
         <>
             <Paper className={classes.paper}>
-                <Grid container spacing={3}>
-                    <Grid item alignItems="center" xs={9}> 
+                <Grid container alignItems="center" spacing={3}>
+                    <Grid item xs={9}> 
                         <Button>
                             <Typography className={classes.title}>{job}</Typography>
                         </Button>  
                     </Grid>
-                    <Grid item alignItems="center" xs={3}> <Play className={classes.pbutton}/> </Grid>
+                    <Grid item xs={3}> <Play className={classes.pbutton}/> </Grid>
                 </Grid>
             </Paper>
         </>
