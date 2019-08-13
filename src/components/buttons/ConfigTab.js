@@ -12,8 +12,7 @@ import { serverHost } from '../../api/config';
 const useStyles = makeStyles(theme => ({
     paper: {
       textAlign: 'center',
-      color: theme.palette.text.secondary,
-      margin : 'auto',
+      color: theme.palette.text.secondary
     },
     title: {
       // textAlign: 'left',
