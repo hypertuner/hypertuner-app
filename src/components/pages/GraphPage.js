@@ -38,6 +38,11 @@ export default function GraphPage() {
   });
 
   useEffect(() => {
+
+		(async()=>{
+
+		})()
+
     graphApi.ping("watch", "hello-world-yeah");
 
     graphApi.addEventListener("message", ({ data }) => {
