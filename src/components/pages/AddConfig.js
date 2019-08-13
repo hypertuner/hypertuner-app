@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function AddConfig({ transition, configList, setConfigList, open, setOpen, name, data }) {
+export default function AddConfig({ onClose=()=>{}, transition, configList, setConfigList, open, setOpen, name, data}) {
     const classes = useStyles();
     const typeLookupMap = { 0: 'float', 1: 'integer', 2: 'boolean', 3: "string" };
     let title = <TextField
@@ -55,6 +55,27 @@ export default function AddConfig({ transition, configList, setConfigList, open,
         name: ""
     });
 
+    function isInt(n){
+        return Number(n) === n && n % 1 === 0;
+    }
+    
+    function isFloat(n){
+        return Number(n) === n && n % 1 !== 0;
+    }
+
+    function getValueType(value) {
+        console.log(value);
+        if (isInt(value)) {
+            return getKeyByValue(typeLookupMap, "integer");
+        } else if (isFloat(value)) {
+            return getKeyByValue(typeLookupMap, "float");
+        } else if (typeof(value) === "boolean") {
+            return getKeyByValue(typeLookupMap, "boolean");
+        } else {
+            return getKeyByValue(typeLookupMap, "string");
+        }
+    }
+
     function getKeyByValue(object, value) {
         return Object.keys(object).find(key => object[key] === value);
     }
@@ -67,8 +88,7 @@ export default function AddConfig({ transition, configList, setConfigList, open,
             let row = {}
             row["name"] = keyName;
             row["value"] = data[keyName];
-            row["type"] = getKeyByValue(typeLookupMap, typeof (data[keyName]));
-            console.log(row);
+            row["type"] = getValueType(data[keyName]);
             respData.push(row);
         });
         return respData;
@@ -85,19 +105,17 @@ export default function AddConfig({ transition, configList, setConfigList, open,
         />
     }
 
-    console.log(state);
-
-    
-
     function changeConfigName(e) {
         state.name = e.target.value;
         console.log(state.name);
     }
 
     function convertTable(data) {
-        let jsonData = {}
+        let jsonData = {};
         Object.values(data).forEach(function (hyp) {
-            if (typeof (hyp["value"]) === "string") {
+            let t = getValueType(hyp["value"]);
+            console.log(t);
+            if (typeLookupMap[t] === "float" || typeLookupMap[t] === "integer") {
                 jsonData[hyp["name"]] = parseFloat(hyp["value"]);
             } else {
                 jsonData[hyp["name"]] = hyp["value"];
@@ -108,6 +126,7 @@ export default function AddConfig({ transition, configList, setConfigList, open,
 
     function handleClose() {
         setOpen(false);
+        onClose();
     }
 
     async function handleSave() {
@@ -132,10 +151,7 @@ export default function AddConfig({ transition, configList, setConfigList, open,
 
             const result = resultResponse.json()
 
-            console.log(result)
-            const configListResponse = await fetch(`${serverHost}/list-config`)
-            const configListData = await configListResponse.json();
-            setConfigList(configListData.configList);
+            console.log(result);
             handleClose();
         }
 
@@ -154,7 +170,7 @@ export default function AddConfig({ transition, configList, setConfigList, open,
                     </div>
                 </Toolbar>
             </AppBar>
-            <ConfigTable state={state} setState={setState} typeLookupMap={typeLookupMap} title={title} />
+            <ConfigTable state={state} setState={setState} typeLookupMap={typeLookupMap} title={title}/>
         </Dialog>
     )
 }

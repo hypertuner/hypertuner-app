@@ -37,7 +37,6 @@ export default function GraphPage() {
     const handleMessage = ({ data }) => {
       const jsonData = JSON.parse(data);
       if (!jsonData.success) return;
-      console.log(jsonData);
 
       if (jsonData.type === "watch-stop") {
         setGraphDataMap(currentGraphData => ({
@@ -86,7 +85,7 @@ export default function GraphPage() {
       graphUnwatch(name, value.watchId);
     }
   };
-
+  console.log(graphDataMap);
   return (
     <>
       <NavBar />

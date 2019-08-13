@@ -21,3 +21,5 @@ const postCall = async (route, payload) => {
 export const getConfigList = () => getCall("list-config");
 
 export const createConfig = saveData => postCall("create-config", saveData);
+
+export const readConfig = name => postCall("read-config", {name});

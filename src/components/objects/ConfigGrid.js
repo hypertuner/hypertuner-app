@@ -29,7 +29,7 @@ export default function FullWidthGrid({transition, configList, setConfigList}) {
       <Grid container direction="column" justify="center" >
         {
           configList.map(config =>
-            <Grid item className={classes.grid}>
+            <Grid key={config} item className={classes.grid}>
               <ConfigTab job={config} transition={transition} configList={configList} setConfigList={setConfigList} />
             </Grid>
           )

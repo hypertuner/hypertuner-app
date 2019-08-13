@@ -46,32 +46,32 @@ export default function AddButton({transition, configList, setConfigList}) {
     setOpen(false);
   }
 
-  async function handleSave() {
-    const saveData = convertTable(state.data);
+  // async function handleSave() {
+  //   const saveData = convertTable(state.data);
 
-    saveData.name = state.name;
-    console.log(saveData);
+  //   saveData.name = state.name;
+  //   console.log(saveData);
 
-    if (configList.includes(state.name)) {
-      alert("This configuration name already exists. Please rename it.")
-    } else if (state.name === "") {
-      alert("Configuration file name is empty. Please name your configuration file.")
-    } else {
-      const result = createConfig(saveData)
+  //   if (configList.includes(state.name)) {
+  //     alert("This configuration name already exists. Please rename it.")
+  //   } else if (state.name === "") {
+  //     alert("Configuration file name is empty. Please name your configuration file.")
+  //   } else {
+  //     const result = createConfig(saveData)
 
-      console.log(result)
-    }
+  //     console.log(result)
+  //   }
 
-    // const configListResponse = await fetch(`${serverHost}/list-config`)
-    // let configList = await configListResponse.json();
-    // configList = configList.configList;
-    // console.log(configList);
+  //   // const configListResponse = await fetch(`${serverHost}/list-config`)
+  //   // let configList = await configListResponse.json();
+  //   // configList = configList.configList;
+  //   // console.log(configList);
 
-    const configListResponse = await fetch(`${serverHost}/list-config`)
-    const configListData = await configListResponse.json();
-    setConfigList(configListData.configList);
-    handleClose();
-  }
+  //   const configListResponse = await fetch(`${serverHost}/list-config`)
+  //   const configListData = await configListResponse.json();
+  //   setConfigList(configListData.configList);
+  //   handleClose();
+  // }
   
   return (
     <>

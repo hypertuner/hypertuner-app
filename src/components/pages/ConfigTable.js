@@ -36,6 +36,7 @@ export default function ConfigTable({state, setState, typeLookupMap, title}) {
               resolve();
               const data = [...state.data];
               data.push(newData);
+              console.log(data);
               setState({ ...state, data });
             }, 600);
           }),
@@ -45,6 +46,7 @@ export default function ConfigTable({state, setState, typeLookupMap, title}) {
               resolve();
               const data = [...state.data];
               data[data.indexOf(oldData)] = newData;
+              console.log(data);
               setState({ ...state, data });
             }, 600);
           }),
@@ -54,6 +56,7 @@ export default function ConfigTable({state, setState, typeLookupMap, title}) {
               resolve();
               const data = [...state.data];
               data.splice(data.indexOf(oldData), 1);
+              console.log(data);
               setState({ ...state, data });
             }, 600);
           }),

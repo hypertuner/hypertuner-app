@@ -8,6 +8,7 @@ import Remove from '../buttons/Remove';
 import Typography from '@material-ui/core/Typography';
 import AddConfig from '../pages/AddConfig';
 import { serverHost } from '../../api/config';
+import { readConfig } from '../../api/rest'
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -25,19 +26,9 @@ export default function ConfigTab({job, transition, configList, setConfigList}) 
     const [configData, setConfigData] = useState([]);
 
     async function getConfigData() {
-        const configDataResponse = await fetch(`${serverHost}/read-config`, {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({"name": job})
-        });
-    
-        //const result = configDataResponse.json()
-
-        const configData = await configDataResponse.json();
+        const configData = await readConfig(job);
         console.log(configData);
+        //const configData = await configDataResponse.json();
         setConfigData(configData);
     }
 
@@ -74,7 +65,9 @@ export default function ConfigTab({job, transition, configList, setConfigList}) 
                         <Button onClick={handleClick}>
                             <Typography className={classes.title}>{job}</Typography>
                         </Button>  
-                        <AddConfig transition={transition} configList={configList} setConfigList={setConfigList}  open={open} setOpen={setOpen} name={job} data={configData}/>
+                        <AddConfig onClose={()=>{
+                            
+                        }} transition={transition} configList={configList} setConfigList={setConfigList} open={open} setOpen={setOpen} name={job} data={configData} />
                     </Grid>
                     <Grid item alignItems="center" xs={3}> 
                         <Play name={job} className={classes.pbutton}/>
