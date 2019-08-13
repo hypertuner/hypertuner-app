@@ -6,11 +6,12 @@ import TerminalPage from "./components/pages/TerminalPage";
 
 import "./App.css";
 
-import { graphApi, terminalSocket } from "./api/actionSocket";
+import { graphApi, terminalSocket, progressSocket } from "./api/actionSocket";
 
 const isSocketReady = () =>
   graphApi.readyState === graphApi.OPEN &&
-  terminalSocket.readyState === terminalSocket.OPEN;
+  terminalSocket.readyState === terminalSocket.OPEN &&
+  progressSocket.readyState === progressSocket.OPEN;
 
 function App() {
   const [isReady, setIsReady] = useState(false);
