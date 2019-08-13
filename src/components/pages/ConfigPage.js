@@ -24,7 +24,6 @@ export default function ConfigPage() {
         getConfigs()
     }, [])
 
-
     console.log(configList);
 
     return (

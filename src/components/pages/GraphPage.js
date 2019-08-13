@@ -18,51 +18,59 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function GraphPage() {
-    const [configList, setConfigList] = useState([])
+    const [configList, setConfigList] = useState([]) //this is fine
 
-    //makes API call to backend to get config list (array of strings)
-    //should abstract this into a separate file
-    useEffect(()=>{
+    const [graphNameMap, setGraphNameMap] = useState(
+       {"c1":true}
+    )
+
+    //make API call makes config list 
+    useEffect(() => {
         async function getConfigs() {
             const configListResponse = await fetch(`${serverHost}/list-config`)
             const configListData = await configListResponse.json();
-            //write something to catch an empty configList 
-            if (configListData.configList) {
-                setConfigList(configListData.configList);
-            }
-            else{
-                setConfigList([]);
-            }
+            setConfigList(configListData.configList);
+            setGraphNameMap(getCheckObject(configListData.configList));
         }
-        getConfigs()
+        getConfigs();
     }, [])
+    
+    // console.log(configList)
+    // console.log(graphNameMap)
 
-    console.log(configList)
+    //array of strings [name1, name2, name3, name4]
 
     const classes = useStyles();
 
     //load from the fucking end point
     const [graphData, setGraphData] = useState([
         {
-            name: "mrFig",
+            name: "c1",
             data: [{ x: 1, y: 3 }, { x: 2, y: 5 }, { x: 3, y: 15 }, { x: 4, y: 12 }]
         },
         {
-            name: "name2",
+            name: "c2",
             data: [{ x: 1, y: 10 }, { x: 2, y: 4 }, { x: 3, y: 2 }, { x: 4, y: 15 }]
         },
         {
-            name: "graph3",
+            name: "c3",
             data: [{ x: 1, y: 7 }, { x: 2, y: 11 }, { x: 3, y: 9 }, { x: 4, y: 2 }]
         }
     ]);
 
-    //TODO: populate when we pull from the saved configs
-    const [graphNameMap, setGraphNameMap] = useState({
-        mrFig: false,
-        name2: false,
-        graph3: true
-    });
+    //function that returns , given config list , return object of all configs
+    function getCheckObject(configList){
+        let newObject = {};
+        let arrayLength = configList.length;
+        for (var i = 0; i <arrayLength; i++){
+            newObject[configList[i]] = false;
+        }
+        return newObject; 
+    }
+
+    // const [graphNameMap, setGraphNameMap] = useState(
+    //     Object.assign(configList, [false, false, false, true, false])
+    //  );
 
     const onCheck = name => event => {
         setGraphNameMap({
