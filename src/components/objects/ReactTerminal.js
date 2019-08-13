@@ -1,59 +1,51 @@
-import React from 'react';
-import { Terminal } from 'xterm';
-import * as attach from 'xterm/lib/addons/attach/attach';
-import * as fit from 'xterm/lib/addons/fit/fit';
-import * as fullscreen from 'xterm/lib/addons/fullscreen/fullscreen';
-import * as search from 'xterm/lib/addons/search/search';
-import getId from './GetId';
+import React from "react";
+import { Terminal } from "xterm";
+import * as attach from "xterm/lib/addons/attach/attach";
+import * as fit from "xterm/lib/addons/fit/fit";
+import * as fullscreen from "xterm/lib/addons/fullscreen/fullscreen";
+import * as search from "xterm/lib/addons/search/search";
+import getId from "./GetId";
+import { terminalSocket } from "../../api/actionSocket";
 
 Terminal.applyAddon(attach);
 Terminal.applyAddon(fit);
 Terminal.applyAddon(fullscreen);
 Terminal.applyAddon(search);
 
-const PORT = 9001 // WebSocket port 
-
-const HOST = `127.0.0.1:${ PORT }`;
-const SOCKET_URL = `ws://${ HOST }/terminal/`;
-
 export default class ReactTerminal extends React.Component {
   constructor(props) {
     super(props);
 
-    this.elementId = `terminal_${ getId() }`;
+    this.elementId = `terminal_${getId()}`;
     this.failures = 0;
-    this.interval = null;
     this.fontSize = 16;
     this.state = {
-      command: ''
+      command: ""
     };
   }
+
   componentDidMount() {
     this.term = new Terminal({
       cursorBlink: true,
       rows: 3,
       fontSize: this.fontSize,
-      windowsMode: true,
       theme: {
-        foreground: '#000',
-        background: '#FFF',
-        cursor: '#000',
+        foreground: "#000",
+        background: "#FFF",
+        cursor: "#000"
       }
     });
 
-    this.term.open(document.querySelector(`#${ this.elementId }`));
+    this.term.open(document.querySelector(`#${this.elementId}`));
     this.term.fit();
     this.term.focus();
-    // this.term.on('resize', ({ cols, rows }) => {
-    //   if (!this.pid) return;
-    //   fetch(`http://${ HOST }/terminals/${ this.pid }/size?cols=${ cols }&rows=${ rows }`, { method: 'POST' });
-    // });
+
     this.term.decreaseFontSize = () => {
-      this.term.setOption('fontSize', --this.fontSize);
+      this.term.setOption("fontSize", --this.fontSize);
       this.term.fit();
     };
     this.term.increaseFontSize = () => {
-      this.term.setOption('fontSize', ++this.fontSize);
+      this.term.setOption("fontSize", ++this.fontSize);
       this.term.fit();
     };
     this._connectToServer();
@@ -61,44 +53,61 @@ export default class ReactTerminal extends React.Component {
     listenToWindowResize(() => {
       this.term.fit();
     });
-    this.term.fit();
-    this.term.textarea.onkeydown = e => {
-      console.log(e.keyCode, e.shiftKey, e.ctrlKey, e.altKey);
-      // ctrl + shift + metakey + +
-      if ((e.keyCode === 187 || e.keyCode === 61) && e.shiftKey && e.ctrlKey && e.altKey) {
-        this.term.setOption('fontSize', ++this.fontSize);
-        this.term.fit();
-      }
-      // ctrl + shift + metakey + -
-      if ((e.keyCode === 189 || e.keyCode === 173) && e.shiftKey && e.ctrlKey && e.altKey) {
-        this.term.setOption('fontSize', --this.fontSize);
-        this.term.fit();
-      }
-      // ctrl + shift + metakey + v
-      if (e.keyCode === 86 && e.shiftKey && e.ctrlKey && e.altKey) {
-        this.props.options.splitVertical && this.props.options.splitVertical();
-      }
-      // ctrl + shift + metakey + h
-      if (e.keyCode === 72 && e.shiftKey && e.ctrlKey && e.altKey) {
-        this.props.options.splitHorizontal && this.props.options.splitHorizontal();
-      }
-      // ctrl + shift + metakey + w
-      if (e.keyCode === 87 && e.shiftKey && e.ctrlKey && e.altKey) {
-        this.props.options.close && this.props.options.close();
-      }
-    };
-  }
-  componentWillUnmount() {
-    clearTimeout(this.interval);
-  }
-  render() {
 
-    return <div style={{
-      position: 'absolute', width: '100%', height: '100%', padding: 'none', margin: 'none'
-    }}>
-        <div id={ this.elementId } style={{
-          position: 'absolute', top: 0, left: 0, padding: 'none', margin: 'none', width: '100%', height: '100%'
-        }}></div>
+    this.term.fit();
+
+    // this.term.textarea.onkeydown = e => {
+    //   console.log(e.keyCode, e.shiftKey, e.ctrlKey, e.altKey);
+    //   // ctrl + shift + metakey + +
+    //   if ((e.keyCode === 187 || e.keyCode === 61) && e.shiftKey && e.ctrlKey && e.altKey) {
+    //     this.term.setOption('fontSize', ++this.fontSize);
+    //     this.term.fit();
+    //   }
+    //   // ctrl + shift + metakey + -
+    //   if ((e.keyCode === 189 || e.keyCode === 173) && e.shiftKey && e.ctrlKey && e.altKey) {
+    //     this.term.setOption('fontSize', --this.fontSize);
+    //     this.term.fit();
+    //   }
+    //   // ctrl + shift + metakey + v
+    //   if (e.keyCode === 86 && e.shiftKey && e.ctrlKey && e.altKey) {
+    //     this.props.options.splitVertical && this.props.options.splitVertical();
+    //   }
+    //   // ctrl + shift + metakey + h
+    //   if (e.keyCode === 72 && e.shiftKey && e.ctrlKey && e.altKey) {
+    //     this.props.options.splitHorizontal && this.props.options.splitHorizontal();
+    //   }
+    //   // ctrl + shift + metakey + w
+    //   if (e.keyCode === 87 && e.shiftKey && e.ctrlKey && e.altKey) {
+    //     this.props.options.close && this.props.options.close();
+    //   }
+
+    //   this.term.write(e.key);
+    // };
+  }
+
+  render() {
+    return (
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "90%",
+          padding: "none",
+          margin: "none"
+        }}
+      >
+        <div
+          id={this.elementId}
+          style={{
+            position: "relative",
+            top: 0,
+            left: 0,
+            padding: "none",
+            margin: "none",
+            width: "100%",
+            height: "100%"
+          }}
+        />
 
         <style>
           {`.xterm {
@@ -238,34 +247,18 @@ export default class ReactTerminal extends React.Component {
                 text-decoration: underline;
             }`}
         </style>
-
-      </div>;
+      </div>
+    );
   }
+
   _connectToServer() {
-    this.socket = new WebSocket(SOCKET_URL);
-    this.socket.onopen = () => {
-      this.term.attach(this.socket);
-    };
-    this.socket.onclose = () => {
-      this.term.writeln('Server disconnected!');
-      this._tryAgain();
-    };
-    this.socket.onerror = () => {
-      this.term.writeln('Server disconnected!');
-      this._tryAgain();
-    };
-  };
+    this.socket = terminalSocket;
 
-  _tryAgain() {
-    this.failiures ++;
-    clearTimeout(this.interval);
-    if (this.failiures <= 3) {
-      this.interval = setTimeout(() => {
-        this._connectToServer();
-      }, 2000);
-    }
+    this.term.attach(terminalSocket, {
+      inputUtf8: true
+    });
   }
-};
+}
 
 function listenToWindowResize(callback) {
   var resizeTimeout;
@@ -273,12 +266,12 @@ function listenToWindowResize(callback) {
   function resizeThrottler() {
     // ignore resize events as long as an actualResizeHandler execution is in the queue
     if (!resizeTimeout) {
-      resizeTimeout = setTimeout(function () {
+      resizeTimeout = setTimeout(function() {
         resizeTimeout = null;
         callback();
       }, 66);
     }
   }
 
-  window.addEventListener('resize', resizeThrottler, false);
+  window.addEventListener("resize", resizeThrottler, false);
 }

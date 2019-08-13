@@ -69,8 +69,8 @@ export default function ConfigTab({job, transition, configList, setConfigList}) 
     return (
         <>
             <Paper className={classes.paper}>
-                <Grid container spacing={3}>
-                    <Grid item alignItems="center" xs={9}> 
+                <Grid container alignItems="center" spacing={3}>
+                    <Grid item xs={9}> 
                         <Button onClick={handleClick}>
                             <Typography className={classes.title}>{job}</Typography>
                         </Button>  
