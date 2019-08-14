@@ -13,12 +13,12 @@ export default {
   },
   overrides: {},
   palette: {
-    common: { black: "#000", white: "#fff" },
+    common: { black: "#353531", white: "#eeebd9" },
     type: "light",
     primary: {
-      main: "#1976d2",
-      light: "rgb(71, 145, 219)",
-      dark: "rgb(17, 82, 147)",
+      main: "#ec4e20", 
+      light: "#eeebd9",
+      dark: "#c3c1b2",
       contrastText: "#fff"
     },
     secondary: {
@@ -59,10 +59,10 @@ export default {
     },
     divider: "rgba(0, 0, 0, 0.12)",
     background: {
-      paper: "#fff",
-      default: "#fff",
-      level2: "#f5f5f5",
-      level1: "#fff"
+      paper: "#fcf9f5", //light peach
+      default: "fafafa", //background color for all containers
+      level2: "#353531", 
+      level1: "#ec4e20"
     },
     action: {
       active: "rgba(0, 0, 0, 0.54)",

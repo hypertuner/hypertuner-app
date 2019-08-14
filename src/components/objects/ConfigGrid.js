@@ -22,9 +22,9 @@ const useStyles = makeStyles(theme => ({
     textAlign: "right"
   },
   grid: {
-    margin: theme.spacing(4),
-    marginBottom: 0,
-    marginTop: theme.spacing(1)
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   }
 }));
 

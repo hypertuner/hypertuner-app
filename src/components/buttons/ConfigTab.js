@@ -16,7 +16,10 @@ import { readConfig } from '../../api/rest'
 const useStyles = makeStyles(theme => ({
   paper: {
     textAlign: 'center',
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
+    width: "60%",
+    height: "100%",
+    padding: theme.spacing(1.5),
   },
   pbutton: {
     textAlign: 'right'
@@ -97,7 +100,7 @@ export default function ConfigTab({
   return (
     <>
       <Paper className={classes.paper}>
-        <Grid container alignItems="center" spacing={3}>
+        <Grid container alignItems="center">
           <Grid item xs={9}>
             <Button onClick={handleClick}>
               <Typography className={classes.title}>{job}</Typography>
