@@ -62,7 +62,7 @@ export const ProcessGraph = ({ graphList }) => {
     return (
         <FlexibleXYPlot onMouseLeave={() => setValue(false)} className={classes.graph} xDomain={getMinMax(graphList)}>
             <HorizontalGridLines style={{ stroke: '#B7E9ED' }} />
-            <VerticalGridLines style={{ stroke: '#B7E9ED' }} />
+            {/* <VerticalGridLines style={{ stroke: '#B7E9ED' }} /> */}
             <XAxis
                 attr="x"
                 attrAxis="y"
