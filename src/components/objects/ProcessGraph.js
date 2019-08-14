@@ -83,7 +83,7 @@ export const ProcessGraph = ({ graphList }) => {
                 title="Loss" />
             {value && <Crosshair values={value}>
                 <div style={{background:"rgb(58,58,71)",
-                            width: "200%",
+                            width: "250%",
                             height: "120%",
                             borderRadius: "5%"}}>
                     <div style={{
@@ -93,9 +93,9 @@ export const ProcessGraph = ({ graphList }) => {
                         display: "flex",
                         flexDirection: "column"
                         }}>
-                        <h3>{value[0].x}</h3>
+                        <h4>Frame: {value[0].x}</h4>
                         {Object.entries(value[0].y).map(([gName, y]) => {
-                            return <div><p>{gName}: {parseFloat(y).toFixed(3)}</p></div>;
+                            return <div><p style={{margin: 0}}>{gName}: {parseFloat(y).toFixed(3)}</p></div>;
                         })}
                     </div>
                 </div>
