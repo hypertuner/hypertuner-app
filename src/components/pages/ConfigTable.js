@@ -1,66 +1,64 @@
-import React from 'react';
-import MaterialTable, { MTableEditField , MTableCell} from 'material-table';
+import React, { useState, useContext } from 'react'
+import MaterialTable, { MTableEditField, MTableCell } from 'material-table'
+import { AddConfigContext } from './AddConfig';
 
-export default function ConfigTable({state, setState, typeLookupMap, title}) {
-  
+
+export default function ConfigTable({
+  defaultData,
+  columns,
+  typeLookupMap,
+  title
+}) {
+  const [data, setData] = useState(defaultData)
+  const { setData : setParentData } = useContext(AddConfigContext);
+
   return (
     <MaterialTable
       title={title}
-      columns={state.columns}
-      data={state.data}
+      columns={columns}
+      data={data}
       options={{
-        actionsColumnIndex: -1
+        actionsColumnIndex: -1,
+        addRowPosition: 'first'
       }}
       components={{
         EditField: ({ columnDef, rowData, ...props }) => {
           if (columnDef.field === 'value') {
             columnDef.type = typeLookupMap[rowData.type]
           }
-          return (
-            <MTableEditField {...props} {...{columnDef, rowData}} />
-          )
+          return <MTableEditField {...props} {...{ columnDef, rowData }} />
         },
-        Cell: ({ columnDef, rowData, ...props}) => {
+        Cell: ({ columnDef, rowData, ...props }) => {
           if (columnDef.field === 'value') {
             columnDef.type = typeLookupMap[rowData.type]
           }
-          return (
-            <MTableCell {...props} {...{columnDef, rowData}} />
-          )
+          return <MTableCell {...props} {...{ columnDef, rowData }} />
         }
       }}
       editable={{
-        onRowAdd: newData =>
-          new Promise(resolve => {
-            setTimeout(() => {
-              resolve();
-              const data = [...state.data];
-              data.push(newData);
-              console.log(data);
-              setState({ ...state, data });
-            }, 600);
-          }),
-        onRowUpdate: (newData, oldData) =>
-          new Promise(resolve => {
-            setTimeout(() => {
-              resolve();
-              const data = [...state.data];
-              data[data.indexOf(oldData)] = newData;
-              console.log(data);
-              setState({ ...state, data });
-            }, 600);
-          }),
-        onRowDelete: oldData =>
-          new Promise(resolve => {
-            setTimeout(() => {
-              resolve();
-              const data = [...state.data];
-              data.splice(data.indexOf(oldData), 1);
-              console.log(data);
-              setState({ ...state, data });
-            }, 600);
-          }),
+        onRowAdd: async newData => {
+          const alpha = [newData, ...data]
+
+          setData(alpha)
+          setParentData(alpha)
+        },
+        onRowUpdate: async (newData, oldData) => {
+          setData(currentData => {
+            currentData[currentData.indexOf(oldData)] = newData
+            const alpha = [...currentData]
+            setParentData(alpha)
+            return alpha
+          })
+        },
+        onRowDelete: async oldData => {
+          setData(currentData => {
+            currentData.splice(currentData.indexOf(oldData), 1)
+            const alpha = [...currentData]
+            setParentData(alpha)
+            return alpha
+          })
+        }
       }}
     />
-  );
+  )
 }

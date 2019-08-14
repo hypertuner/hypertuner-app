@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
   // },
 }));
 
-export default function SaveButton({handleSave, state}) {
+export default function SaveButton({handleSave}) {
   const classes = useStyles();
   return (
     <div className={classes.toolbarButtons}>
