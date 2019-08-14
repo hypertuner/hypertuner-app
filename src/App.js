@@ -8,7 +8,7 @@ import "./App.css";
 
 import { graphApi, terminalSocket, progressSocket } from "./api/actionSocket";
 import { ThemeProvider } from "@material-ui/styles";
-import { theme } from "./_theme";
+import { theme } from "./themes";
 
 const isSocketReady = () =>
   graphApi.readyState === graphApi.OPEN &&
