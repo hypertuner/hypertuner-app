@@ -92,11 +92,11 @@ export const ProcessGraph = ({ graphList }) => {
                         height: "100%",
                         display: "flex",
                         flexDirection: "column",
-                        fontSize: "150%"
+                        fontSize: "130%"
                         }}>
                         <h4>Frame: {value[0].x}</h4>
                         {Object.entries(value[0].y).map(([gName, y]) => {
-                            return <div><p style={{margin: "3%"}}>{gName}: {parseFloat(y).toFixed(3)}</p></div>;
+                            return <div><p style={{margin: "2%"}}>{gName}: {parseFloat(y).toFixed(3)}</p></div>;
                         })}
                     </div>
                 </div>
