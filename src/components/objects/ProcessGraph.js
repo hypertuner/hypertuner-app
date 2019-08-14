@@ -82,15 +82,20 @@ export const ProcessGraph = ({ graphList }) => {
                 tickTotal={5}
                 title="Loss" />
             {value && <Crosshair values={value}>
-                <div style={{background:"rgb(58,58,71)"}}>
+                <div style={{background:"rgb(58,58,71)",
+                            width: "200%",
+                            height: "120%",
+                            borderRadius: "5%"}}>
                     <div style={{
                         margin: "10%",
                         width: "100%",
-                        height: "100%"
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column"
                         }}>
                         <h3>{value[0].x}</h3>
                         {Object.entries(value[0].y).map(([gName, y]) => {
-                            return <p>{gName}: {parseFloat(y).toFixed(3)}</p>;
+                            return <div><p>{gName}: {parseFloat(y).toFixed(3)}</p></div>;
                         })}
                     </div>
                 </div>
