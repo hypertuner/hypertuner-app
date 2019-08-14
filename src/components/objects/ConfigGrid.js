@@ -60,9 +60,7 @@ export function ConfigGrid({ transition, configList, setConfigList }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  console.log(processStatuses)
-
-  console.log(processStatuses);
+  console.log(Object.keys(processStatuses));
 
   return (
     <div className={classes.root}>

@@ -11,15 +11,16 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 })
 
 export default function ConfigPage() {
-  const [configList, setConfigList] = useState([])
+  const [configList, setConfigList] = useState([]);
 
-  useEffect(() => {
-    ;(async () => {
-      const configListData = await getConfigList()
-      setConfigList(configListData.configList)
-    })()
-  }, [])
+  // useEffect(() => {
+  //   ;(async () => {
+  //     const configListData = await getConfigList();
+  //     setConfigList(configListData.configList)
+  //   })()
+  // }, [])
 
+  // console.log(configList);
   return (
     <>
       <NavBar />

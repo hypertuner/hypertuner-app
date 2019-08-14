@@ -138,9 +138,9 @@ export default function AddConfig({
   }
 
   async function handleClose() {
-    const configListData = await getConfigList()
-    setConfigList(configListData.configList)
-    setOpen(false)
+    // const configListData = await getConfigList()
+    // setConfigList(configListData.configList)
+    setOpen(false);
   }
 
   async function handleSave() {
@@ -168,7 +168,8 @@ export default function AddConfig({
 
       const result = resultResponse.json()
 
-      console.log(result)
+      console.log(result);
+      console.log(configList);
       handleClose()
     }
   }
