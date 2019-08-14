@@ -17,7 +17,7 @@ export default function DeleteButton({name, configList, setConfigList}) {
 
         const result = resultResponse.json()
 
-        console.log(result)
+        // console.log(result)
         const configListResponse = await fetch(`${serverHost}/list-config`)
         const configListData = await configListResponse.json();
         setConfigList(configListData.configList);

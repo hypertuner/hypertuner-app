@@ -30,7 +30,7 @@ export default function ConfigTab({job, transition, configList, setConfigList, s
 
     async function getConfigData() {
         const configData = await readConfig(job);
-        console.log(configData);
+        // console.log(configData);
         //const configData = await configDataResponse.json();
         setConfigData(configData);
     }

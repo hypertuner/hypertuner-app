@@ -16,12 +16,9 @@ export default function ConfigPage() {
     useEffect(()=>{
         (async () =>  {
             const configListData = await getConfigList();
-            console.log(configListData.configList);
             setConfigList(configListData.configList);
         })()
     }, [])
-
-    console.log(configList);
 
     return (
         <>

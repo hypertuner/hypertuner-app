@@ -127,8 +127,8 @@ export default function GraphPage() {
       graphUnwatch(name, value.watchId);
     }
   };
-  console.log("GRAPH DATA MAP");
-  console.log(graphDataMap);
+
+  
   return (
     <>
       <NavBar />
