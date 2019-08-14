@@ -17,8 +17,9 @@ const useStyles = makeStyles(theme => ({
   paper: {
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    width: "80%",
-    height: "500%"
+    width: "60%",
+    height: "100%",
+    padding: theme.spacing(1.5)
   },
   pbutton: {
     textAlign: 'right'
