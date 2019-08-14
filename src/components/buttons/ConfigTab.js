@@ -11,7 +11,7 @@ import Remove from '../buttons/Remove';
 import Typography from '@material-ui/core/Typography';
 import AddConfig from '../pages/AddConfig';
 import { serverHost } from '../../api/config';
-import { readConfig } from '../../api/rest'
+import { readConfig } from '../../api/rest';
 
 const useStyles = makeStyles(theme => ({
   paper: {

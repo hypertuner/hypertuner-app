@@ -115,12 +115,12 @@ export default function GraphPage() {
     <>
       <NavBar />
       <Grid container className={classes.graph}>
-        <Grid item xs={12} sm={9}>
+        <Grid item xs={12} sm={10}>
           <ProcessGraph
             graphList={Object.values(graphDataMap).filter(v => !!v)}
           />
         </Grid>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={2}>
           <CheckBoxGroup>
             {Object.entries(graphDataMap).map(([name, value]) => (
               <FormControlLabel

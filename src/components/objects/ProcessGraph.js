@@ -10,7 +10,12 @@ import {
     makeVisFlexible
 } from "react-vis";
 
-const useStyles = makeStyles(theme => ({}));
+const useStyles = makeStyles(theme => ({
+    graph: {
+        paddingLeft: "5px",
+        paddingRight: "5px"
+    }
+}));
 
 const FlexibleXYPlot = makeVisFlexible(XYPlot);
 
@@ -29,10 +34,14 @@ export const ProcessGraph = ({ graphList }) => {
     const classes = useStyles();
 
     return (
-        <FlexibleXYPlot xDomain={getMinMax(graphList)}>
+        <FlexibleXYPlot className={classes.graph} xDomain={getMinMax(graphList)}>
             <HorizontalGridLines style={{ stroke: '#B7E9ED' }} />
             <VerticalGridLines style={{ stroke: '#B7E9ED' }} />
             <XAxis
+                attr="x"
+                attrAxis="y"
+                orientation="bottom"
+                tickTotal={5}
                 title="X Axis"
                 style={{
                     line: { stroke: '#ADDDE1' },
@@ -40,7 +49,12 @@ export const ProcessGraph = ({ graphList }) => {
                     text: { stroke: 'none', fill: '#6b6b76', fontWeight: 600 }
                 }}
             />
-            <YAxis title="Y Axis" />
+            <YAxis
+                attr="y"
+                attrAxis="x"
+                orientation="left"
+                tickTotal={5}
+                title="Y Axis" />
             {graphList.map(({ graphName, graphData }) =>
                 <LineSeries
                     key={graphName}
