@@ -16,7 +16,9 @@ import { readConfig } from '../../api/rest';
 const useStyles = makeStyles(theme => ({
   paper: {
     textAlign: 'center',
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
+    width: "80%",
+    height: "500%"
   },
   pbutton: {
     textAlign: 'right'
