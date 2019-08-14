@@ -11,21 +11,11 @@ import { ThemeProvider } from "@material-ui/styles";
 import { theme } from "./themes";
 
 function App() {
-  const [isReady, setIsReady] = useState(false);
+  // const [isReady, setIsReady] = useState(false);
 
-  useEffect(() => {
-    setIsReady(
-      graphApi.readyState === graphApi.OPEN &&
-        terminalSocket.readyState === terminalSocket.OPEN &&
-        progressSocket.readyState === progressSocket.OPEN
-    );
-  }, [
-    graphApi.readyState,
-    terminalSocket.readyState,
-    progressSocket.readyState
-  ]);
-
-  return isReady ? (
+  return graphApi.readyState === graphApi.OPEN &&
+    terminalSocket.readyState === terminalSocket.OPEN &&
+    progressSocket.readyState === progressSocket.OPEN ? (
     <ThemeProvider theme={theme}>
       <Router>
         <Switch>
