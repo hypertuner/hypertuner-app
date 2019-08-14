@@ -7,6 +7,8 @@ import TerminalPage from "./components/pages/TerminalPage";
 import "./App.css";
 
 import { graphApi, terminalSocket, progressSocket } from "./api/actionSocket";
+import { ThemeProvider } from "@material-ui/styles";
+import { theme } from "./_theme";
 
 const isSocketReady = () =>
   graphApi.readyState === graphApi.OPEN &&
@@ -21,13 +23,15 @@ function App() {
   }, []);
 
   return isReady ? (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={ConfigPage} />
-        <Route path="/graph" component={GraphPage} />
-        <Route path="/terminal" component={TerminalPage} />
-      </Switch>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={ConfigPage} />
+          <Route path="/graph" component={GraphPage} />
+          <Route path="/terminal" component={TerminalPage} />
+        </Switch>
+      </Router>
+    </ThemeProvider>
   ) : (
     <div
       style={{
