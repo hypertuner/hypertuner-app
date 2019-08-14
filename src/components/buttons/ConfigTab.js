@@ -4,6 +4,9 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Play from '../buttons/Play';
+import Done from '../buttons/Done';
+import InProgress from '../buttons/InProgress';
+import Queued from '../buttons/Queued';
 import Remove from '../buttons/Remove';
 import Typography from '@material-ui/core/Typography';
 import AddConfig from '../pages/AddConfig';
@@ -20,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function ConfigTab({job, transition, configList, setConfigList})  {
+export default function ConfigTab({job, transition, configList, setConfigList, status})  {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [configData, setConfigData] = useState([]);
@@ -57,7 +60,20 @@ export default function ConfigTab({job, transition, configList, setConfigList}) 
         setOpen(true);
     }
 
+    const icon = () => {
+        if (status === "saved") {
+            return <Play name={job} className={classes.pbutton}/>
+        } else if (status === "queued") {
+            return <Queued name={job} className={classes.pbutton}/>
+        } else if (status === "running") {
+            return <InProgress name={job} className={classes.pbutton}/>
+        } else {
+            return <Done name={job} className={classes.pbutton}/>
+        }
+    }
+
     return (
+
         <>
             <Paper className={classes.paper}>
                 <Grid container alignItems="center" spacing={3}>
@@ -70,7 +86,7 @@ export default function ConfigTab({job, transition, configList, setConfigList}) 
                         }} transition={transition} configList={configList} setConfigList={setConfigList} open={open} setOpen={setOpen} name={job} data={configData} />
                     </Grid>
                     <Grid item alignItems="center" xs={3}> 
-                        <Play name={job} className={classes.pbutton}/>
+                        {icon()}
                         <Remove name={job} configList={configList} setConfigList={setConfigList} className={classes.pbutton}/>
                     </Grid>
                 </Grid>

@@ -21,47 +21,47 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const [processStatuses, setProcessStatuses] = useState({});
-const [progressWatchId, setProgressWatchId] = useState();
-
-useEffect(() => {
-  const handleMessage = ({ data }) => {
-    const jsonData = JSON.parse(data);
-
-    if (!jsonData.success) return;
-    console.log(jsonData);
-
-    if (jsonData.type === "progress-stop") {
-      setProgressWatchId(null);
-    }
-
-    if (jsonData.type === "progress-data") {
-      setProcessStatuses(jsonData.processStatus);
-      setProgressWatchId(jsonData.watchId);
-      console.log(jsonData.processStatus);
-    }
-  };
-
-  progressWatch();
-  progressSocket.addEventListener("message", handleMessage)
-
-  return () => {
-    progressSocket.removeEventListener("message", handleMessage);
-    progressUnwatch(progressWatchId);
-  };
-// eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
 
 export default function FullWidthGrid({transition, configList, setConfigList}) {
   const classes = useStyles();
+
+
+  const [processStatuses, setProcessStatuses] = useState({});
+  const [progressWatchId, setProgressWatchId] = useState();
+
+  useEffect(() => {
+    const handleMessage = ({ data }) => {
+      const jsonData = JSON.parse(data);
+
+      if (!jsonData.success) return;
+
+      if (jsonData.type === "progress-stop") {
+        setProgressWatchId(null);
+      }
+
+      if (jsonData.type === "progress-data") {
+        setProcessStatuses(jsonData.processStatus);
+        setProgressWatchId(jsonData.watchId);
+      }
+    };
+
+    progressWatch();
+    progressSocket.addEventListener("message", handleMessage)
+
+    return () => {
+      progressSocket.removeEventListener("message", handleMessage);
+      progressUnwatch(progressWatchId);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className={classes.root}>
       <Grid container direction="column" justify="center" >
         {
-          configList.map(config =>
-            <Grid key={config} item className={classes.grid}>
-              <ConfigTab job={config} transition={transition} configList={configList} setConfigList={setConfigList} />
+          Object.entries(processStatuses).map(([name, status]) =>
+            <Grid key={name} item className={classes.grid}>
+              <ConfigTab job={name} transition={transition} configList={Object.keys(processStatuses)} setConfigList={setConfigList} status={status} />
             </Grid>
           )
         }
