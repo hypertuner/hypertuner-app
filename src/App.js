@@ -10,24 +10,27 @@ import { graphApi, terminalSocket, progressSocket } from "./api/actionSocket";
 import { ThemeProvider } from "@material-ui/styles";
 import { theme } from "./themes";
 
+const socketReady = () =>
+  graphApi.readyState === graphApi.OPEN &&
+  terminalSocket.readyState === terminalSocket.OPEN &&
+  progressSocket.readyState === progressSocket.OPEN;
+
 function App() {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
+    const testReady = setInterval(() => {
       console.log(
         graphApi.readyState,
         terminalSocket.readyState,
         progressSocket.readyState
       );
 
-    }, 1000);
-    
-    setIsReady(
-      graphApi.readyState === graphApi.OPEN &&
-        terminalSocket.readyState === terminalSocket.OPEN &&
-        progressSocket.readyState === progressSocket.OPEN
-    );
+      if (socketReady()) {
+        setIsReady(socketReady());
+        clearInterval(testReady);
+      }
+    }, 500);
   }, []);
 
   return isReady ? (
