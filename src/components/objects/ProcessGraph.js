@@ -14,11 +14,22 @@ const useStyles = makeStyles(theme => ({}));
 
 const FlexibleXYPlot = makeVisFlexible(XYPlot);
 
+const getMinMax = (graphList) => {
+    if (typeof graphList !== 'undefined' && graphList.length > 0) {
+        const mins = graphList.map(({ graphName, graphData }) => parseFloat(graphData[0].x));
+        const maxes = graphList.map(({ graphName, graphData }) => parseFloat(graphData[graphData.length - 1].x));
+
+        return [Math.min(...mins), Math.max(...maxes)]
+    }
+
+    return [0, 0]
+}
+
 export const ProcessGraph = ({ graphList }) => {
     const classes = useStyles();
-    console.log(graphList);
+
     return (
-        <FlexibleXYPlot>
+        <FlexibleXYPlot xDomain={getMinMax(graphList)}>
             <HorizontalGridLines style={{ stroke: '#B7E9ED' }} />
             <VerticalGridLines style={{ stroke: '#B7E9ED' }} />
             <XAxis
@@ -32,6 +43,7 @@ export const ProcessGraph = ({ graphList }) => {
             <YAxis title="Y Axis" />
             {graphList.map(({ graphName, graphData }) =>
                 <LineSeries
+                    key={graphName}
                     className={graphName}
                     data={graphData}
                     style={{

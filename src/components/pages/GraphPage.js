@@ -8,8 +8,6 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { graphApi, graphWatch, graphUnwatch, progressSocket, progressWatch, progressUnwatch  } from "../../api/actionSocket";
 
-import { getConfigList } from '../../api/rest'
-
 const useStyles = makeStyles(theme => ({
   graph: {
     height: '90%',
@@ -36,7 +34,7 @@ export default function GraphPage() {
   useEffect(() => {
     const handleMessage = ({ data }) => {
       const jsonData = JSON.parse(data)
-      if (!jsonData.success) return
+      if (!jsonData.success) return;
 
       if (jsonData.type === 'watch-stop') {
         setGraphDataMap(currentGraphData => ({
@@ -54,19 +52,6 @@ export default function GraphPage() {
     }
 
     graphApi.addEventListener('message', handleMessage)
-
-    ;(async () => {
-      const { configList } = await getConfigList()
-
-      setGraphDataMap(
-        configList.reduce((p, c) => {
-          p[c] = null
-          return p
-        }, {})
-      )
-
-      configList.filter((c, i) => i < 3).map(c => graphWatch(c))
-    })()
 
     return () => {
       graphApi.removeEventListener('message', handleMessage)
@@ -95,19 +80,6 @@ export default function GraphPage() {
       if (jsonData.type === "progress-data") {
         setProcessStatuses(jsonData.processStatus);
         setProgressWatchId(jsonData.watchId);
-
-        // (async () => {
-        //   const { configList } = await getConfigList();
-    
-        //   setGraphDataMap(
-        //     configList.reduce((p, c) => {
-        //       p[c] = null;
-        //       return p;
-        //     }, {})
-        //   );
-    
-        //   configList.filter((c, i) => i < 3).map(c => graphWatch(c));
-        // })();
         
         const displayableGraphs = Object.keys(jsonData.processStatus).filter((e) => {
           return jsonData.processStatus[e] === 'finished' || jsonData.processStatus[e] === 'running';
@@ -138,7 +110,7 @@ export default function GraphPage() {
       graphUnwatch(name, value.watchId)
     }
   };
-
+  
   return (
     <>
       <NavBar />

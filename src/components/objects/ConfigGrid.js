@@ -62,6 +62,8 @@ export function ConfigGrid({ transition, configList, setConfigList }) {
 
   console.log(processStatuses)
 
+  console.log(processStatuses);
+
   return (
     <div className={classes.root}>
       <Grid container direction="column" justify="center">
