@@ -11,17 +11,20 @@ import { graphApi, terminalSocket, progressSocket } from "./api/actionSocket";
 import { ThemeProvider } from "@material-ui/styles";
 import { theme } from "./themes";
 
-const isSocketReady = () =>
-  graphApi.readyState === graphApi.OPEN &&
-  terminalSocket.readyState === terminalSocket.OPEN &&
-  progressSocket.readyState === progressSocket.OPEN;
-
 function App() {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    setIsReady(isSocketReady());
-  }, []);
+    setIsReady(
+      graphApi.readyState === graphApi.OPEN &&
+        terminalSocket.readyState === terminalSocket.OPEN &&
+        progressSocket.readyState === progressSocket.OPEN
+    );
+  }, [
+    graphApi.readyState,
+    terminalSocket.readyState,
+    progressSocket.readyState
+  ]);
 
   return isReady ? (
     <ThemeProvider theme={theme}>
