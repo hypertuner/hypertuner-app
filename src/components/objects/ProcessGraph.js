@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import {
     XYPlot,
     XAxis,
@@ -9,8 +8,6 @@ import {
     LineSeries,
     makeVisFlexible
 } from "react-vis";
-
-const useStyles = makeStyles(theme => ({}));
 
 const FlexibleXYPlot = makeVisFlexible(XYPlot);
 
@@ -26,8 +23,6 @@ const getMinMax = (graphList) => {
 }
 
 export const ProcessGraph = ({ graphList }) => {
-    const classes = useStyles();
-
     return (
         <FlexibleXYPlot xDomain={getMinMax(graphList)}>
             <HorizontalGridLines style={{ stroke: '#B7E9ED' }} />

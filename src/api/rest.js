@@ -20,6 +20,10 @@ const postCall = async (route, payload) => {
 
 export const getConfigList = () => getCall("list-config");
 
+export const runConfig = name => postCall("run-config", { name });
+
+export const removeConfig = name => postCall("remove-config", { name });
+
 export const createConfig = saveData => postCall("create-config", saveData);
 
-export const readConfig = name => postCall("read-config", {name});
+export const readConfig = name => postCall("read-config", { name });

@@ -6,7 +6,7 @@ import { CheckBoxGroup } from "../objects/Checkbox";
 import { ProcessGraph } from "../objects/ProcessGraph";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import { graphApi, graphWatch, graphUnwatch, progressSocket, progressWatch, progressUnwatch  } from "../../api/actionSocket";
+import { graphSocket, graphWatch, graphUnwatch, progressSocket, progressWatch, progressUnwatch  } from "../../api/actionSocket";
 
 const useStyles = makeStyles(theme => ({
   graph: {
@@ -51,10 +51,10 @@ export default function GraphPage() {
       }
     }
 
-    graphApi.addEventListener('message', handleMessage)
+    graphSocket.addEventListener('message', handleMessage)
 
     return () => {
-      graphApi.removeEventListener('message', handleMessage)
+      graphSocket.removeEventListener('message', handleMessage)
       Object.values(graphDataMap)
         .filter(v => !!v)
         .map(({ graphName, watchId }) => graphUnwatch(graphName, watchId))
@@ -64,7 +64,6 @@ export default function GraphPage() {
   }, [])
 
 
-  const [processStatuses, setProcessStatuses] = useState({});
   const [progressWatchId, setProgressWatchId] = useState();
 
   useEffect(() => {
@@ -78,7 +77,6 @@ export default function GraphPage() {
       }
 
       if (jsonData.type === "progress-data") {
-        setProcessStatuses(jsonData.processStatus);
         setProgressWatchId(jsonData.watchId);
         
         const displayableGraphs = Object.keys(jsonData.processStatus).filter((e) => {

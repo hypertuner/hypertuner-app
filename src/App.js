@@ -6,12 +6,12 @@ import TerminalPage from "./components/pages/TerminalPage";
 
 import "./App.css";
 
-import { graphApi, terminalSocket, progressSocket } from "./api/actionSocket";
+import { graphSocket, terminalSocket, progressSocket } from "./api/actionSocket";
 import { ThemeProvider } from "@material-ui/styles";
 import { theme } from "./themes";
 
 const socketReady = () =>
-  graphApi.readyState === graphApi.OPEN &&
+  graphSocket.readyState === graphSocket.OPEN &&
   terminalSocket.readyState === terminalSocket.OPEN &&
   progressSocket.readyState === progressSocket.OPEN;
 
@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     const testReady = setInterval(() => {
       console.log(
-        graphApi.readyState,
+        graphSocket.readyState,
         terminalSocket.readyState,
         progressSocket.readyState
       );

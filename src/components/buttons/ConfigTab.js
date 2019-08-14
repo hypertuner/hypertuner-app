@@ -10,7 +10,7 @@ import Queued from '../buttons/Queued';
 import Remove from '../buttons/Remove';
 import Typography from '@material-ui/core/Typography';
 import AddConfig from '../pages/AddConfig';
-import { serverHost } from '../../api/config';
+
 import { readConfig } from '../../api/rest'
 
 const useStyles = makeStyles(theme => ({
@@ -26,8 +26,6 @@ const useStyles = makeStyles(theme => ({
 export default function ConfigTab({
   job,
   transition,
-  configList,
-  setConfigList,
   status
 }) {
   const classes = useStyles()
@@ -69,7 +67,7 @@ export default function ConfigTab({
     let respData = []
     delete data['success']
     delete data['name']
-    Object.keys(data).map(function(keyName, keyIndex) {
+    Object.keys(data).forEach(function(keyName, keyIndex) {
       let row = {}
       row['name'] = keyName
       row['value'] = data[keyName]
@@ -78,26 +76,6 @@ export default function ConfigTab({
     })
     return respData
   }
-
-  // useEffect(()=>{
-  //     // async function getConfigData() {
-  //     //     const configDataResponse = await fetch(`${serverHost}/read-config`, {
-  //     //         method: 'POST',
-  //     //         headers: {
-  //     //           Accept: 'application/json',
-  //     //           'Content-Type': 'application/json',
-  //     //         },
-  //     //         body: JSON.stringify({"name": job})
-  //     //     });
-
-  //     //     //const result = configDataResponse.json()
-
-  //     //     const configData = await configDataResponse.json();
-  //     //     console.log(configData);
-  //     //     setConfigData(configData);
-  //     // }
-  //     getConfigData();
-  // }, []);
 
   async function handleClick() {
     await getConfigData()
@@ -126,8 +104,6 @@ export default function ConfigTab({
             </Button>
             <AddConfig
               transition={transition}
-              configList={configList}
-              setConfigList={setConfigList}
               open={open}
               setOpen={setOpen}
               defaultName={job}
@@ -139,8 +115,6 @@ export default function ConfigTab({
             {icon()}
             <Remove
               name={job}
-              configList={configList}
-              setConfigList={setConfigList}
               className={classes.pbutton}
             />
           </Grid>

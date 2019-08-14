@@ -1,22 +1,12 @@
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import PlayIcon from '@material-ui/icons/PlayArrow';
-import { serverHost } from '../../api/config';
+import { runConfig } from '../../api/rest';
 
 export default function PlayButton({name}) {
 
   async function handlePlay() {
-    
-    const resultResponse = await fetch(`${serverHost}/run-config`, {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({name: name})
-    });
-
-    // const result = await resultResponse.json();
+    await runConfig(name)
   }
 
   return (

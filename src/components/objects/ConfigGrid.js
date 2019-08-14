@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
-import ConfigTab from '../buttons/ConfigTab'
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import ConfigTab from "../buttons/ConfigTab";
 import {
   progressSocket,
   progressWatch,
   progressUnwatch
-} from '../../api/actionSocket'
+} from "../../api/actionSocket";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,21 +14,21 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2)
   },
   paper: {
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.text.secondary,
-    margin: 'auto'
+    margin: "auto"
   },
   pbutton: {
-    textAlign: 'right'
+    textAlign: "right"
   },
   grid: {
     margin: theme.spacing(4),
     marginBottom: 0,
     marginTop: theme.spacing(1)
   }
-}))
+}));
 
-export function ConfigGrid({ transition, configList, setConfigList }) {
+export function ConfigGrid({ transition }) {
   const classes = useStyles();
 
   const [processStatuses, setProcessStatuses] = useState({});
@@ -38,31 +38,27 @@ export function ConfigGrid({ transition, configList, setConfigList }) {
     const handleMessage = ({ data }) => {
       const jsonData = JSON.parse(data);
 
-      if (!jsonData.success) return
+      if (!jsonData.success) return;
 
-      if (jsonData.type === 'progress-stop') {
+      if (jsonData.type === "progress-stop") {
         setProgressWatchId(null);
       }
 
-      if (jsonData.type === 'progress-data') {
+      if (jsonData.type === "progress-data") {
         setProcessStatuses(jsonData.processStatus);
         setProgressWatchId(jsonData.watchId);
       }
-    }
+    };
 
     progressWatch();
-    progressSocket.addEventListener('message', handleMessage);
+    progressSocket.addEventListener("message", handleMessage);
 
     return () => {
-      progressSocket.removeEventListener('message', handleMessage);
+      progressSocket.removeEventListener("message", handleMessage);
       progressUnwatch(progressWatchId);
-    }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  console.log(processStatuses)
-
-  console.log(processStatuses);
+  }, []);
 
   return (
     <div className={classes.root}>
@@ -72,13 +68,11 @@ export function ConfigGrid({ transition, configList, setConfigList }) {
             <ConfigTab
               job={name}
               transition={transition}
-              configList={Object.keys(processStatuses)}
-              setConfigList={setConfigList}
               status={status}
             />
           </Grid>
         ))}
       </Grid>
     </div>
-  )
+  );
 }
