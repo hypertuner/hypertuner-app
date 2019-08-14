@@ -64,7 +64,7 @@ export default function AddConfig({ onClose=()=>{}, transition, configList, setC
     }
 
     function getValueType(value) {
-        console.log(value);
+        // console.log(value);
         if (isInt(value)) {
             return getKeyByValue(typeLookupMap, "integer");
         } else if (isFloat(value)) {
@@ -107,14 +107,14 @@ export default function AddConfig({ onClose=()=>{}, transition, configList, setC
 
     function changeConfigName(e) {
         state.name = e.target.value;
-        console.log(state.name);
+        // (state.name);
     }
 
     function convertTable(data) {
         let jsonData = {};
         Object.values(data).forEach(function (hyp) {
             let t = getValueType(hyp["value"]);
-            console.log(t);
+            //console.log(t);
             if (typeLookupMap[t] === "float" || typeLookupMap[t] === "integer") {
                 jsonData[hyp["name"]] = parseFloat(hyp["value"]);
             } else {
@@ -133,7 +133,7 @@ export default function AddConfig({ onClose=()=>{}, transition, configList, setC
         const saveData = convertTable(state.data);
 
         saveData.name = state.name;
-        console.log(saveData);
+        // console.log(saveData);
 
         if (configList.includes(state.name)) {
             alert("This configuration name already exists. Please rename it.")
@@ -151,7 +151,7 @@ export default function AddConfig({ onClose=()=>{}, transition, configList, setC
 
             const result = resultResponse.json()
 
-            console.log(result);
+            // console.log(result);
             handleClose();
         }
 

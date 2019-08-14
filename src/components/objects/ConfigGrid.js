@@ -55,6 +55,8 @@ export default function FullWidthGrid({transition, configList, setConfigList}) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  console.log(processStatuses);
+
   return (
     <div className={classes.root}>
       <Grid container direction="column" justify="center" >
