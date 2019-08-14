@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ConfigPage from "./components/pages/ConfigPage";
 import GraphPage from "./components/pages/GraphPage";
 import TerminalPage from "./components/pages/TerminalPage";
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import "./App.css";
 
@@ -24,6 +25,7 @@ function App() {
 
   return isReady ? (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Router>
         <Switch>
           <Route exact path="/" component={ConfigPage} />
