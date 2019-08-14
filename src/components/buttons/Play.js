@@ -16,12 +16,7 @@ export default function PlayButton({name}) {
         body: JSON.stringify({name: name})
     });
 
-    const result = await resultResponse.json();
-    if (result.success) {
-      alert("It's alive!!!");
-    } else {
-      alert("Process failed");
-    }
+    // const result = await resultResponse.json();
   }
 
   return (

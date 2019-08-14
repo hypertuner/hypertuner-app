@@ -3,6 +3,14 @@ import MaterialTable, { MTableEditField, MTableCell } from 'material-table'
 import { AddConfigContext } from './AddConfig';
 
 
+function parseType(newData) {
+  if (newData.type === "0" || newData.type === "1") {
+    newData.value = parseFloat(newData.value);
+  } 
+  return newData;
+}
+
+
 export default function ConfigTable({
   defaultData,
   columns,
@@ -37,14 +45,15 @@ export default function ConfigTable({
       }}
       editable={{
         onRowAdd: async newData => {
+          newData = parseType(newData);
           const alpha = [newData, ...data]
-
+          console.log(newData);
           setData(alpha)
           setParentData(alpha)
         },
         onRowUpdate: async (newData, oldData) => {
           setData(currentData => {
-            currentData[currentData.indexOf(oldData)] = newData
+            currentData[currentData.indexOf(oldData)] = parseType(newData);
             const alpha = [...currentData]
             setParentData(alpha)
             return alpha

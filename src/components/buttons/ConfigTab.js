@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import Paper from '@material-ui/core/Paper'
-import Grid from '@material-ui/core/Grid'
-import Play from '../buttons/Play'
-import Remove from '../buttons/Remove'
-import Typography from '@material-ui/core/Typography'
-import AddConfig from '../pages/AddConfig'
-import { serverHost } from '../../api/config'
+import React, {useState} from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Play from '../buttons/Play';
+import Done from '../buttons/Done';
+import InProgress from '../buttons/InProgress';
+import Queued from '../buttons/Queued';
+import Remove from '../buttons/Remove';
+import Typography from '@material-ui/core/Typography';
+import AddConfig from '../pages/AddConfig';
+import { serverHost } from '../../api/config';
 import { readConfig } from '../../api/rest'
 
 const useStyles = makeStyles(theme => ({
@@ -24,7 +27,8 @@ export default function ConfigTab({
   job,
   transition,
   configList,
-  setConfigList
+  setConfigList,
+  status
 }) {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false)
@@ -45,6 +49,7 @@ export default function ConfigTab({
   }
 
   function getValueType(value) {
+    console.log(value, typeof(value));
     if (isInt(value)) {
       return getKeyByValue(typeLookupMap, 'integer')
     } else if (isFloat(value)) {
@@ -99,6 +104,18 @@ export default function ConfigTab({
     setOpen(true)
   }
 
+  const icon = () => {
+    if (status === "saved") {
+        return <Play name={job} className={classes.pbutton}/>
+    } else if (status === "queued") {
+        return <Queued name={job} className={classes.pbutton}/>
+    } else if (status === "running") {
+        return <InProgress name={job} className={classes.pbutton}/>
+    } else {
+        return <Done name={job} className={classes.pbutton}/>
+    }
+  }
+
   return (
     <>
       <Paper className={classes.paper}>
@@ -118,7 +135,8 @@ export default function ConfigTab({
             />
           </Grid>
           <Grid item xs={3}>
-            <Play name={job} className={classes.pbutton} />
+            {/* <Play name={job} className={classes.pbutton} /> */}
+            {icon()}
             <Remove
               name={job}
               configList={configList}

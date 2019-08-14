@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import Grid from '@material-ui/core/Grid'
-import { makeStyles } from '@material-ui/core/styles'
-import NavBar from '../navigation/NavBar'
-import { CheckBoxGroup } from '../objects/Checkbox'
-import { ProcessGraph } from '../objects/ProcessGraph'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
-import { graphApi, graphWatch, graphUnwatch } from '../../api/actionSocket'
+import React, { useState, useEffect } from "react";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+import NavBar from "../navigation/NavBar";
+import { CheckBoxGroup } from "../objects/Checkbox";
+import { ProcessGraph } from "../objects/ProcessGraph";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import { graphApi, graphWatch, graphUnwatch, progressSocket, progressWatch, progressUnwatch  } from "../../api/actionSocket";
 
 import { getConfigList } from '../../api/rest'
 
@@ -78,14 +78,67 @@ export default function GraphPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+
+  const [processStatuses, setProcessStatuses] = useState({});
+  const [progressWatchId, setProgressWatchId] = useState();
+
+  useEffect(() => {
+    const handleMessage = ({ data }) => {
+      const jsonData = JSON.parse(data);
+
+      if (!jsonData.success) return;
+
+      if (jsonData.type === "progress-stop") {
+        setProgressWatchId(null);
+      }
+
+      if (jsonData.type === "progress-data") {
+        setProcessStatuses(jsonData.processStatus);
+        setProgressWatchId(jsonData.watchId);
+
+        // (async () => {
+        //   const { configList } = await getConfigList();
+    
+        //   setGraphDataMap(
+        //     configList.reduce((p, c) => {
+        //       p[c] = null;
+        //       return p;
+        //     }, {})
+        //   );
+    
+        //   configList.filter((c, i) => i < 3).map(c => graphWatch(c));
+        // })();
+        
+        const displayableGraphs = Object.keys(jsonData.processStatus).filter((e) => {
+          return jsonData.processStatus[e] === 'finished' || jsonData.processStatus[e] === 'running';
+        })
+        setGraphDataMap(displayableGraphs.reduce((p, c) => {
+          p[c] = null;
+          return p;
+        }, {}));
+        displayableGraphs.filter((c, i) => i < 3).map(c => graphWatch(c));
+      }
+    };
+
+    progressWatch();
+    progressSocket.addEventListener("message", handleMessage)
+
+    return () => {
+      progressSocket.removeEventListener("message", handleMessage);
+      progressUnwatch(progressWatchId);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+
   const onCheck = (name, value) => event => {
     if (event.target.checked) {
       graphWatch(name)
     } else {
       graphUnwatch(name, value.watchId)
     }
-  }
-  console.log(graphDataMap)
+  };
+
   return (
     <>
       <NavBar />

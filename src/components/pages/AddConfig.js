@@ -76,7 +76,6 @@ export default function AddConfig({
   }
 
   function getValueType(value) {
-    console.log(value)
     if (isInt(value)) {
       return getKeyByValue(typeLookupMap, 'integer')
     } else if (isFloat(value)) {
@@ -129,7 +128,6 @@ export default function AddConfig({
     let jsonData = {}
     Object.values(data).forEach(function(hyp) {
       let t = getValueType(hyp['value'])
-      console.log(t)
       if (typeLookupMap[t] === 'float' || typeLookupMap[t] === 'integer') {
         jsonData[hyp['name']] = parseFloat(hyp['value'])
       } else {
@@ -146,11 +144,11 @@ export default function AddConfig({
   }
 
   async function handleSave() {
-    console.log(data)
+    console.log(data);
     const saveData = convertTable(data)
 
     saveData.name = name
-    console.log(saveData)
+    console.log(saveData);
 
     if (configList.includes(name)) {
       alert('This configuration name already exists. Please rename it.')
