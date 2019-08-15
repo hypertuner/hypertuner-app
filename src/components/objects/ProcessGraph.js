@@ -60,8 +60,6 @@ export const ProcessGraph = ({ graphList }) => {
     }
   }
 
-  console.log(value);
-
   return (
     <FlexibleXYPlot
       onMouseLeave={() => setValue(false)}
@@ -112,7 +110,7 @@ export const ProcessGraph = ({ graphList }) => {
               <h4>Frame: {value[0].x}</h4>
               {Object.entries(value[0].y).map(([gName, y]) => {
                 return (
-                  <div>
+                  <div key={gName}>
                     <p style={{ margin: "2%" }}>
                       {gName}: {parseFloat(y).toFixed(3)}
                     </p>
