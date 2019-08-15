@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     // margin: theme.spacing(1.5),
     marginLeft: "auto",
     marginRight: -15
-  },
+  }
 }));
 
 export default function NavBar() {
@@ -34,16 +34,16 @@ export default function NavBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
           >
             <MenuIcon />
-          </IconButton>
-          <Typography variant="h5" color="inherit">
-            HyperTuner
+          </IconButton> */}
+          <Typography style={{fontFamily: "Minimalust"}} variant="h5" color="inherit">
+            hypErtUner
           </Typography>
           <span className={classes.toolbarButtons}>
             <Link className={classes.button} to='/' >
