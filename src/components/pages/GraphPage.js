@@ -62,19 +62,19 @@ export default function GraphPage() {
 
     return () => {
       graphSocket.removeEventListener('message', handleMessage)
+      Object.values(graphDataMap)
+        .filter(v => !!v)
+        .map(({ graphName, watchId }) => graphUnwatch(graphName, watchId))
 
       // graphApi.close();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(() => {
-    return () => {
-      Object.values(graphDataMap)
-        .filter(v => !!v)
-        .map(({ graphName, watchId }) => graphUnwatch(graphName, watchId))
-    }
-  }, [graphDataMap])
+  // useEffect(() => {
+  //   return () => {
+  //   }
+  // }, [graphDataMap])
 
   const [progressWatchId, setProgressWatchId] = useState()
 
