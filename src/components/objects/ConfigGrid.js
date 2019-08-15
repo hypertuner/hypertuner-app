@@ -55,15 +55,16 @@ export function ConfigGrid({ transition }) {
 
     return () => {
       progressSocket.removeEventListener('message', handleMessage)
+      if (progressWatchId) progressUnwatch(progressWatchId)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(() => {
-    return () => {
-      if (progressWatchId) progressUnwatch(progressWatchId)
-    }
-  }, [progressWatchId])
+  // useEffect(() => {
+  //   return () => {
+  //     if (progressWatchId) progressUnwatch(progressWatchId)
+  //   }
+  // }, [progressWatchId])
 
   return (
     <div className={classes.root}>

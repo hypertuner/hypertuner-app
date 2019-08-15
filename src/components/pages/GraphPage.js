@@ -114,15 +114,16 @@ export default function GraphPage() {
 
     return () => {
       progressSocket.removeEventListener('message', handleMessage)
+      if (progressWatchId) progressUnwatch(progressWatchId)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  useEffect(() => {
-    return () => {
-      if (progressWatchId) progressUnwatch(progressWatchId)
-    }
-  }, [progressWatchId])
+  // useEffect(() => {
+  //   return () => {
+
+  //   }
+  // }, [progressWatchId])
 
   const onCheck = (name, value) => event => {
     if (event.target.checked) {
